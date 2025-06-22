@@ -1,4 +1,4 @@
-# models.py
+# C:\Users\rama\Desktop\hanacaraka\HANACARAKA\models.py
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from extensions import db
@@ -15,6 +15,9 @@ class User(UserMixin, db.Model):
         self.username = username
         self.password_hash = password_hash
         self.profile_image = profile_image
+
+    def __repr__(self):
+        return f'<User {self.username}>'
 
 class TestResult(db.Model):
     id = db.Column(db.Integer, primary_key=True)

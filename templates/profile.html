@@ -1,137 +1,83 @@
-<!-- templates/profile.html -->
+<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\profile.html -->
 {% extends 'base.html' %}
 {% block content %}
     <div class="container mt-5">
         <h2 class="text-center mb-4">User Profile</h2>
-        <div class="card mb-4 shadow-sm">
+        <div class="card mb-4">
             <div class="card-body text-center">
-                <h4>{{ user.username }}</h4>
                 {% if user.profile_image %}
                     <img src="{{ url_for('profile.get_profile_image') }}" alt="Profile Picture" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
                 {% else %}
-                    <img src="https://via.placeholder.com/150?text=No+Image" alt="Default Profile Picture" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    <div class="rounded-circle bg-secondary mb-3 mx-auto" style="width: 150px; height: 150px; line-height: 150px; color: white;">No Image</div>
                 {% endif %}
-                <a href="{{ url_for('profile.upload_profile_picture') }}" class="btn btn-primary">Change Profile Picture</a>
+                <h4>{{ user.username }}</h4>
+                <a href="{{ url_for('profile.update_profile') }}" class="btn btn-primary">Update Profile</a>
             </div>
         </div>
-
-        <h3 class="mb-4">Test Statistics</h3>
+        <h3>Test Statistics</h3>
         <div class="row">
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5>Total Tests</h5>
-                        <p class="fs-4">{{ stats.total_tests }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5>Reading Tests</h5>
-                        <p class="fs-4">{{ stats.reading_tests }}</p>
-                        {% if stats.avg_reading is defined %}
-                            <div class="badge bg-primary">Score: {{ stats.avg_reading | round(2) }}%</div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5>Listening Tests</h5>
-                        <p class="fs-4">{{ stats.listening_tests }}</p>
-                        {% if stats.avg_listening is defined %}
-                            <div class="badge bg-primary">Score: {{ stats.avg_listening | round(2) }}%</div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5>Writing Tests</h5>
-                        <p class="fs-4">{{ stats.writing_tests }}</p>
-                        {% if stats.avg_writing is defined %}
-                            <div class="badge bg-success">Score: {{ stats.avg_writing | round(2) }}/9</div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5>Speaking Tests</h5>
-                        <p class="fs-4">{{ stats.speaking_tests }}</p>
-                        {% if stats.avg_speaking is defined %}
-                            <div class="badge bg-success">Score: {{ stats.avg_speaking | round(2) }}/9</div>
-                        {% endif %}
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>Total Tests: {{ stats.total_tests }}</h5>
+                        <p>Reading: {{ stats.reading_tests }} (Avg: {{ stats.avg_reading|round(2) }})</p>
+                        <p>Listening: {{ stats.listening_tests }} (Avg: {{ stats.avg_listening|round(2) }})</p>
+                        <p>Writing: {{ stats.writing_tests }} (Avg: {{ stats.avg_writing|round(2) }})</p>
+                        <p>Speaking: {{ stats.speaking_tests }} (Avg: {{ stats.avg_speaking|round(2) }})</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <h3 class="mt-5 mb-4">Test History</h3>
-        <div class="table-responsive">
-            <table class="table table-striped" id="test-history-table">
-                <thead>
-                    <tr>
-                        <th>Test Type</th>
-                        <th>Set</th>
-                        <th>Score</th>
-                        <th>Date</th>
-                        <th>Action</th>
+        <h3>Test History</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Test Type</th>
+                    <th>Set Name</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr id="result-{{ result.id }}">
+                        <td>{{ result.test_type|title }}</td>
+                        <td>{{ result.set_name }}</td>
+                        <td>{{ result.score.get('overall', result.score.get('percentage', 0))|round(2) }}</td>
+                        <td>{{ result.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            <form class="delete-result-form" 
+                                  data-result-id="{{ result.id }}"
+                                  data-url="{{ url_for('profile.delete_result', result_id=result.id) }}"
+                                  method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for result in results %}
-                        <tr id="result-{{ result.id }}">
-                            <td>{{ result.test_type.capitalize() }}</td>
-                            <td>{{ result.set_name }}</td>
-                            <td>
-                                {% if result.test_type in ['reading', 'listening'] %}
-                                    {{ result.score.percentage | round(2) }}% ({{ result.score.correct }}/{{ result.score.total }})
-                                {% elif result.test_type in ['writing', 'speaking'] %}
-                                    Overall: {{ result.score.overall | round(2) }}/9
-                                    <div class="small">
-                                        {% for task_score in result.score.tasks %}
-                                            Task {{ task_score.task_number if result.test_type == 'speaking' else loop.index }}: 
-                                            {{ task_score.scores.overall | round(2) if result.test_type == 'speaking' else task_score.overall | round(2) }}/9<br>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </td>
-                            <td>{{ result.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                            <td>
-                                <form class="delete-result-form" data-result-id="{{ result.id }}" data-url="{{ url_for('results.delete_result', result_id=result.id) }}">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-        <!-- Modal Sukses -->
-        <div class="modal fade" id="deleteSuccessModal" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteSuccessModalLabel">Success</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Test result deleted successfully!
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-                    </div>
+    <!-- Modal for Delete Success -->
+    <div class="modal fade" id="deleteSuccessModal" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteSuccessModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Test result deleted successfully.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}?v=1.0"></script>
 {% endblock %}
