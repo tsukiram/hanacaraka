@@ -1,0 +1,44 @@
+<!-- templates/listening_test.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center">Listening Comprehension Test - {{ set.set_name }}</h2>
+    <form id="listeningForm" method="POST" action="{{ url_for('test_listening.submit_listening') }}" data-submit-url="{{ url_for('test_listening.submit_listening') }}" data-results-url="{{ url_for('results.view_results') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="set_name" value="{{ set.set_name }}">
+        {% for recording in set.recordings %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Recording: {{ recording.directory.split('/')[-1] }}</h5>
+                </div>
+                <div class="card-body">
+                    <audio controls class="w-100 mb-3">
+                        <source src="{{ url_for('static', filename=recording.directory.lstrip('/')) }}" type="audio/wav">
+                    </audio>
+                    <p>{{ recording.audio_text }}</p>
+                    {% for question in recording.questions %}
+                        <div class="mb-3">
+                            <p><strong>{{ question.question_text }}</strong></p>
+                            {% if question.question_type == 'single_choice' %}
+                                {% for option in question.options %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="{{ question.question_text }}" value="{{ option }}" required>
+                                        <label class="form-check-label">{{ option }}</label>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% for option in question.options %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="{{ question.question_text }}" value="{{ option }}">
+                                        <label class="form-check-label">{{ option }}</label>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <script src="{{ url_for('static', filename='js/listening.js') }}"></script>
+{% endblock %}

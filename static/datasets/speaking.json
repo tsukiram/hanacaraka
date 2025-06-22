@@ -1,0 +1,50 @@
+{
+    "speaking_comprehension": [
+      {
+        "set_name": "Set 1",
+        "tasks": [
+          {
+            "task_number": 1,
+            "task_type": "Personal Preference",
+            "question_type": "not_audio",
+            "audio_path": "",
+            "audio_text":"",
+            "prompt": "Some people prefer to live in a small town, while others prefer a big city. Which do you prefer and why? Include specific reasons and examples to support your answer.",
+            "preparation_time": 0
+            ,
+            "response_time": 45
+          },
+          {
+            "task_number": 2,
+            "task_type": "Integrated Speaking",
+            "question_type": "with_audio",
+            "audio_path": "audio/speaking/audio_task2.wav",
+            "audio_text": "Narrator: You will hear a lecture discussing remote work. First, you have some time to look at the prompt.\n[Pause for 30 seconds]\nLecturer: While remote work has gained popularity due to its flexibility and cost-saving benefits, it also presents significant challenges that are often overlooked. Firstly, working remotely can lead to feelings of isolation among employees, which negatively impacts teamwork and collaborative creativity. A 2023 study conducted by the Global Workplace Analytics revealed that 60% of remote workers reported feeling disconnected from their colleagues, resulting in decreased morale and innovation. Secondly, it's important to recognize that not all professions are suited to remote work. For instance, jobs in healthcare, manufacturing, or retail require physical presence, making remote work impractical. Lastly, contrary to common assumptions, working from home does not always increase productivity. Many employees face distractions such as household chores, childcare responsibilities, or noisy environments, which can significantly reduce their efficiency. These findings challenge the widely held belief that remote work is universally beneficial.",
+            "prompt": "Summarize the reading's key points and explain how the lecture challenges them.",
+            "preparation_time": 0,
+            "response_time": 60
+          },
+          {
+            "task_number": 3,
+            "task_type": "Agree/Disagree",
+            "question_type": "not_audio",
+            "audio_path": "",
+            "audio_text":"",
+            "prompt": "Do you agree or disagree with the following statement? 'Students should be required to wear uniforms.' Support your opinion with details and examples.",
+            "preparation_time": 0,
+            "response_time": 45
+          },
+          {
+            "task_number": 4,
+            "task_type": "Integrated Speaking",
+            "question_type": "with _audio",
+            "audio_path": "audio/speaking/audio_task2.wav",
+            "audio_text": "You will hear a short lecture about bird migration and its challenges. Listen carefully to answer the prompt that follows.\nBirds migrate primarily for two critical reasons: food availability and suitable climate conditions. A striking example is the Arctic tern, which undertakes the longest known migration of any animal—traveling over 25,000 miles annually between the Arctic and Antarctic to access rich fishing grounds. Similarly, many songbirds migrate to warmer regions when winter makes insects scarce in their breeding areas.\nHowever, climate change is severely disrupting these natural patterns. Warmer temperatures are causing seasonal mismatches: some birds now depart too early, arriving before their food sources are available, while others delay migration and face unexpected storms. For instance, research shows that European robins are arriving at their breeding grounds weeks earlier than decades ago, only to find that insect populations haven't yet peaked. These timing errors lead to starvation, failed reproduction, and population declines. Scientists warn that without adaptation, many migratory species may face extinction.",
+            "prompt": "Using examples from the lecture, explain why birds migrate and how climate change affects this behavior.",
+            "preparation_time": 0,
+            "response_time": 60
+          }
+        ]
+      }
+    ]
+  }

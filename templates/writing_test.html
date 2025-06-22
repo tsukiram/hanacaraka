@@ -1,0 +1,79 @@
+<!-- templates/writing_test.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center">Writing Comprehension Test - {{ set.set_name }}</h2>
+    <form id="writingForm" method="POST" action="{{ url_for('test_writing.submit_writing') }}" data-submit-url="{{ url_for('test_writing.submit_writing') }}" data-results-url="{{ url_for('results.view_results') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="set_name" value="{{ set.set_name }}">
+        
+        <!-- Store word ranges in hidden input for better reliability -->
+        <input type="hidden" id="wordRangesData" value="{{ word_ranges | tojson | e }}">
+        
+        {% for task in set.tasks %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Task {{ task.task_number }}: {{ task.task_type|title }}</h5>
+                    {% if task.subtype %}
+                        <small class="text-muted">{{ task.subtype }}</small>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if task.reading_passage %}
+                        <div class="mb-3">
+                            <strong>Reading Passage:</strong>
+                            <div class="border p-3 bg-light">{{ task.reading_passage }}</div>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <strong>Instructions:</strong>
+                        <p>{{ task.instructions }}</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Prompt:</strong>
+                        <p class="text-primary">{{ task.prompt }}</p>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Time Limit:</strong> {{ task.time_limit }} minutes
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Word Range:</strong> {{ task.word_range.min }} - {{ task.word_range.max }} words
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="answer_{{ task.task_number }}" class="form-label">Your Answer:</label>
+                        <textarea class="form-control writing-textarea" 
+                                  id="answer_{{ task.task_number }}"
+                                  name="answer_{{ task.task_number }}" 
+                                  rows="10" 
+                                  required
+                                  data-task-number="{{ task.task_number }}"
+                                  data-min-words="{{ task.word_range.min }}"
+                                  data-max-words="{{ task.word_range.max }}"
+                                  placeholder="Type your answer here..."></textarea>
+                        <div class="d-flex justify-content-between">
+                            <small id="wordCount_{{ task.task_number }}" class="form-text text-muted">Word count: 0</small>
+                            <small class="form-text text-muted">Required: {{ task.word_range.min }}-{{ task.word_range.max }} words</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+        <div class="text-center">
+            <button type="submit" class="btn btn-secondary btn-lg" id="submitButton" disabled>
+                Submit Writing Test
+            </button>
+            <div class="mt-2">
+                <small class="text-muted">Submit button will be enabled when all word count requirements are met</small>
+            </div>
+        </div>
+    </form>
+
+    <link href="{{ url_for('static', filename='css/writing.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/writing.js') }}"></script>
+{% endblock %}

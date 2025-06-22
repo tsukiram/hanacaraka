@@ -1,0 +1,41 @@
+<!-- templates/reading_test.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center">Reading Comprehension Test - {{ set.set_name }}</h2>
+    <form id="readingForm" method="POST" data-submit-url="{{ url_for('test_reading.submit_reading') }}" data-results-url="{{ url_for('results.view_results') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="set_name" value="{{ set.set_name }}">
+        {% for passage in set.passages %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>{{ passage.passage_title }}</h5>
+                </div>
+                <div class="card-body">
+                    <p>{{ passage.passage_text }}</p>
+                    {% for question in passage.questions %}
+                        <div class="mb-3">
+                            <p><strong>{{ question.question_text }}</strong></p>
+                            {% if question.question_type == 'single_choice' %}
+                                {% for option in question.options %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="{{ question.question_text }}" value="{{ option }}" required>
+                                        <label class="form-check-label">{{ option }}</label>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% for option in question.options %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="{{ question.question_text }}" value="{{ option }}">
+                                        <label class="form-check-label">{{ option }}</label>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <script src="{{ url_for('static', filename='js/reading.js') }}"></script>
+{% endblock %}

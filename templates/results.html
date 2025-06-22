@@ -1,0 +1,156 @@
+<!-- templates/results.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center">Test Results</h2>
+    <div class="table-responsive">
+        <table class="table table-striped" id="test-results-table">
+            <thead>
+                <tr>
+                    <th>Test Type</th>
+                    <th>Set</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr id="result-{{ result.id }}">
+                        <td>{{ result.test_type.capitalize() }}</td>
+                        <td>{{ result.set_name }}</td>
+                        <td>
+                            {% if result.test_type in ['reading', 'listening'] %}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-primary fs-6">{{ result.score.percentage | round(2) }}%</span>
+                                    <small class="text-muted">({{ result.score.correct }}/{{ result.score.total }})</small>
+                                </div>
+                            {% elif result.test_type in ['writing', 'speaking'] %}
+                                {% if result.score.overall is defined %}
+                                    <div class="mb-2">
+                                        <span class="badge bg-success fs-6">Overall: {{ result.score.overall | round(2) }}/9</span>
+                                    </div>
+                                    {% if result.score.tasks is defined %}
+                                        <div class="small">
+                                            {% for task_score in result.score.tasks %}
+                                                <div class="mb-1">
+                                                    <strong>Task {{ task_score.task_number if result.test_type == 'speaking' else loop.index }}:</strong> 
+                                                    {{ task_score.scores.overall | round(2) if result.test_type == 'speaking' else task_score.overall | round(2) }}/9
+                                                    <div class="ms-2 text-muted" style="font-size: 0.8em;">
+                                                        {% if result.test_type == 'writing' %}
+                                                            TA: {{ task_score.task_achievement }}, 
+                                                            CC: {{ task_score.coherence }}, 
+                                                            V: {{ task_score.vocabulary }}, 
+                                                            G: {{ task_score.grammar }}
+                                                        {% else %}
+                                                            Fluency: {{ task_score.scores.fluency }}, 
+                                                            Coherence: {{ task_score.scores.coherence }}, 
+                                                            Vocabulary: {{ task_score.scores.vocabulary }}, 
+                                                            Pronunciation: {{ task_score.scores.pronunciation }}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+                                    <!-- Fallback for old formats -->
+                                    <div class="small">
+                                        {% for key, value in result.score.items() %}
+                                            {{ key.replace('_', ' ').title() }}: {{ value }}/9<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="small">
+                                    {% if result.score is mapping %}
+                                        {% for key, value in result.score.items() %}
+                                            {{ key.replace('_', ' ').title() }}: {{ value }}<br>
+                                        {% endfor %}
+                                    {% else %}
+                                        {{ result.score }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>{{ result.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>
+                            <form class="delete-result-form" data-result-id="{{ result.id }}" data-url="{{ url_for('results.delete_result', result_id=result.id) }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if not results %}
+        <div class="text-center mt-5">
+            <h4>No test results found</h4>
+            <p class="text-muted">Take some tests to see your results here!</p>
+            <a href="{{ url_for('home.home_page') }}" class="btn btn-primary">Take a Test</a>
+        </div>
+    {% endif %}
+
+    <!-- Summary Statistics -->
+    {% if results %}
+        <div class="mt-5">
+            <h3>Performance Summary</h3>
+            <div class="row">
+                {% set test_types = {} %}
+                {% for result in results %}
+                    {% if test_types.update({result.test_type: test_types.get(result.test_type, []) + [result]}) %}{% endif %}
+                {% endfor %}
+                
+                {% for test_type, test_results in test_types.items() %}
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ test_type.capitalize() }}</h5>
+                                <p class="card-text">
+                                    <strong>{{ test_results|length }}</strong> test(s) taken
+                                </p>
+                                {% if test_type in ['reading', 'listening'] %}
+                                    {% set avg_score = (test_results | map(attribute='score.percentage') | sum) / (test_results|length) %}
+                                    <div class="badge bg-primary fs-6">Score: {{ avg_score | round(2) }}%</div>
+                                {% elif test_type in ['writing', 'speaking'] %}
+                                    {% set scores = [] %}
+                                    {% for result in test_results %}
+                                        {% if result.score.overall is defined %}
+                                            {% if scores.append(result.score.overall) %}{% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if scores %}
+                                        {% set avg_score = (scores | sum) / (scores|length) %}
+                                        <div class="badge bg-success fs-6">Score: {{ avg_score | round(2) }}/9</div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Modal Sukses -->
+    <div class="modal fade" id="deleteSuccessModal" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteSuccessModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Test result deleted successfully!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/results.js') }}"></script>
+{% endblock %}

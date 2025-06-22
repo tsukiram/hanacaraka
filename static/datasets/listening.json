@@ -1,0 +1,267 @@
+{
+    "listening_comprehension": [
+      {
+        "set_name": "Set 1",
+        "recordings": [
+          {
+            "directory": "/datasets/static/recording/recording1_lecture-biology.wav",
+            "audio_text": "Recording 1: Lecture - Biology\nNarrator: \"You will hear part of a lecture in a biology class. First, you have some time to look at questions 1 to 5.\"\n\n\"Now listen carefully and answer questions 1 to 5.\"\nProfessor:\n\"Today, we'll discuss symbiosis—a close ecological relationship between organisms of different species. There are three main types: mutualism, where both benefit; commensalism, where one benefits without harming the other; and parasitism, where one benefits at the other's expense. A classic example of mutualism is the relationship between bees and flowers. Bees get nectar, while flowers get pollinated. In contrast, tapeworms in mammals represent parasitism. Understanding these interactions helps us evaluate ecosystem health.\"",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the main topic of the lecture?",
+                "options": [
+                  "The role of bees in pollination",
+                  "The three types of symbiotic relationships",
+                  "The impact of parasites on mammals",
+                  "Methods to evaluate ecosystem health"
+                ],
+                "correct_answer": "The three types of symbiotic relationships"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "According to the professor, what defines commensalism?",
+                "options": [
+                  "Both species benefit from the relationship",
+                  "One species benefits while the other is harmed",
+                  "One species benefits without affecting the other",
+                  "Both species compete for the same resources"
+                ],
+                "correct_answer": "One species benefits without affecting the other"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Why does the professor mention bees and flowers?",
+                "options": [
+                  "To explain how parasitism works",
+                  "To illustrate an example of mutualism",
+                  "To show a case of commensalism",
+                  "To discuss the decline of bee populations"
+                ],
+                "correct_answer": "To illustrate an example of mutualism"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the significance of understanding symbiotic relationships, according to the lecture?",
+                "options": [
+                  "It helps in breeding new species",
+                  "It allows scientists to control ecosystems",
+                  "It aids in evaluating ecosystem health",
+                  "It prevents the spread of parasites"
+                ],
+                "correct_answer": "It allows scientists to control ecosystems"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO of the following are examples mentioned in the lecture?",
+                "options": [
+                  "A bird building a nest in a tree (commensalism)",
+                  "Bees pollinating flowers while collecting nectar (mutualism)",
+                  "Tapeworms living inside mammals (parasitism)",
+                  "A lion hunting a zebra (predation)"
+                ],
+                "correct_answer": [
+                  "Bees pollinating flowers while collecting nectar (mutualism)",
+                  "Tapeworms living inside mammals (parasitism)"
+                ]
+              }
+            ]
+          },
+          {
+            "directory": "audio/recording/recording2_conversation-campus-life.mp3",
+            "audio_text": "Recording 2: Conversation - Campus Life\nNarrator: \"You will hear a conversation between a student and a librarian. First, you have some time to look at questions 6 to 10.\"\n\n\"Now listen carefully and answer questions 6 to 10.\"\nStudent: \"Hi! I'm working on a research paper about renewable energy, but I'm feeling a bit overwhelmed by the database search. Do you have any advice?\"\nLibrarian: \"Absolutely! Here's a good starting point: First, narrow your results by selecting 'peer-reviewed' and limiting the publication date to the last five years. Instead of broad terms like 'renewable energy,' try more specific keywords—for example, 'solar panel efficiency trends' or 'offshore wind power advancements.' Oh, and a pro tip—if you find one solid article, skim its references for even more useful sources!\"\nStudent: \"That's really helpful! Thanks so much!\"\nLibrarian: \"You're welcome! Let me know if you'd like help refining your keywords or accessing any full-text articles.\"",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the student's main concern?",
+                "options": [
+                  "They cannot find any books on renewable energy",
+                  "They feel overwhelmed by the database search",
+                  "They need help formatting their research paper",
+                  "They want to borrow a laptop from the library"
+                ],
+                "correct_answer": "They feel overwhelmed by the database search"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the librarian's FIRST suggestion for improving the search?",
+                "options": [
+                  "Use only books instead of online databases",
+                  "Select 'peer-reviewed' and limit publication dates",
+                  "Ask a professor for recommended sources",
+                  "Search for the broadest possible keywords"
+                ],
+                "correct_answer": "Select 'peer-reviewed' and limit publication dates"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What does the librarian recommend regarding keywords?",
+                "options": [
+                  "Always use general terms like 'renewable energy'",
+                  "Avoid using recent publications for accuracy",
+                  "Try more specific phrases like 'solar panel efficiency trends'",
+                  "Only rely on sources from the last ten years"
+                ],
+                "correct_answer": "Try more specific phrases like 'solar panel efficiency trends'"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the librarian's 'pro tip' for finding additional sources?",
+                "options": [
+                  "Copy entire articles and paste them into the paper",
+                  "Check the references of a good article for more leads",
+                  "Only use sources from the library's physical collection",
+                  "Skip peer-reviewed articles to save time"
+                ],
+                "correct_answer": "Check the references of a good article for more leads"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO pieces of advice does the librarian give?",
+                "options": [
+                  "Use broad search terms to get more results",
+                  "Focus on peer-reviewed and recent articles",
+                  "Avoid citing references from other papers",
+                  "Check the references of useful articles for more sources"
+                ],
+                "correct_answer": [
+                  "Focus on peer-reviewed and recent articles",
+                  "Check the references of useful articles for more sources"
+                ]
+              }
+            ]
+          },
+          {
+            "directory": "audio/recording/recording3_lecture-history.wav",
+            "audio_text": "Recording 3: Lecture - History\nNarrator: \"You will hear part of a lecture in a history class. The topic is the Industrial Revolution. First, you have some time to look at questions 11 to 15.\"\n\n\"Now listen carefully and answer questions 11 to 15.\"\nProfessor:\n\"Today, we'll discuss the Industrial Revolution, a pivotal period that began in 18th-century Britain. Three key factors drove this transformation: technological innovations like the steam engine, rapid population growth, and abundant access to coal as an energy source. As factories replaced traditional manual labor, production efficiency soared. However, this shift also led to unintended consequences, such as urban overcrowding, pollution, and harsh working conditions—often with 14-hour workdays and child labor. In response, the late 19th century saw the rise of labor movements advocating for workers' rights, including shorter hours and safer environments. These reforms laid the groundwork for modern labor laws.\"",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "Where did the Industrial Revolution begin?",
+                "options": [
+                  "France",
+                  "Germany",
+                  "Britain",
+                  "United States"
+                ],
+                "correct_answer": "Britain"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What was NOT mentioned as a key factor driving the Industrial Revolution?",
+                "options": [
+                  "Technological innovations like the steam engine",
+                  "Rapid population growth",
+                  "Government policies promoting trade",
+                  "Abundant access to coal"
+                ],
+                "correct_answer": "Government policies promoting trade"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What was one major consequence of the shift to factory labor?",
+                "options": [
+                  "Decreased production efficiency",
+                  "Improved air quality in cities",
+                  "Urban overcrowding and pollution",
+                  "Shorter workdays for children"
+                ],
+                "correct_answer": "Urban overcrowding and pollution"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What did labor movements in the late 19th century advocate for?",
+                "options": [
+                  "Longer work hours to increase profits",
+                  "The return to manual labor systems",
+                  "Workers' rights, including safer conditions",
+                  "Reduced access to education for children"
+                ],
+                "correct_answer": "Workers' rights, including safer conditions"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO of the following were direct outcomes of the Industrial Revolution?",
+                "options": [
+                  "Invention of the internet",
+                  "Harsh working conditions with 14-hour days",
+                  "Decline in urban population density",
+                  "Rise of labor movements for workers' rights",
+                  "Replacement of coal with solar energy"
+                ],
+                "correct_answer": [
+                  "Harsh working conditions with 14-hour days",
+                  "Rise of labor movements for workers' rights"
+                ]
+              }
+            ]
+          },
+          {
+            "directory": "audio/recording/recording4_conversation-student-and-professor.mp3",
+            "audio_text": "Recording 4: Conversation - Student & Professor\nNarrator: \"You will hear a conversation between a student and an astronomy professor. The topic is the difference between asteroids and comets. First, you have some time to look at questions 16 to 20.\"\n\n\"Now listen carefully and answer questions 16 to 20.\"\nStudent:\n\"Professor, I've been studying for the midterm, but I'm still unclear about how asteroids and comets differ. The textbook calls them both 'minor celestial bodies,' but they seem completely different...\"\nProfessor:\n\"That's an important distinction! Let me clarify: Asteroids are essentially rocky fragments, most orbiting in the main belt between Mars and Jupiter. Comets are icy bodies originating from the outer solar system - what astronomers call 'dirty snowballs' of frozen gases and dust.\"\nStudent:\n\"So when we see comets with bright tails, is that because of the ice?\"\nProfessor:\n\"Exactly right! As comets approach the sun, solar radiation vaporizes their ice, creating two distinct tails: a dust tail and an ion tail. That's why famous comets like Halley's or Hale-Bopp become so spectacular - their tails can stretch millions of kilometers!\"\nStudent:\n\"And asteroids never display this behavior?\"\nProfessor:\n\"Never. Without volatile ices, asteroids remain inert. They may collide and create debris fields - in fact, we think some meteor showers come from asteroid fragments - but you'll never see an asteroid with a glowing tail.\"",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the main topic of the conversation?",
+                "options": [
+                  "The formation of meteor showers",
+                  "Differences between asteroids and comets",
+                  "The discovery of Halley's Comet",
+                  "How solar radiation affects planets"
+                ],
+                "correct_answer": "Differences between asteroids and comets"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Where are most asteroids located, according to the professor?",
+                "options": [
+                  "Beyond Neptune",
+                  "Between Mars and Jupiter",
+                  "Near Earth's atmosphere",
+                  "Orbiting the Sun randomly"
+                ],
+                "correct_answer": "Between Mars and Jupiter"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What causes comets to develop visible tails?",
+                "options": [
+                  "Collisions with other celestial bodies",
+                  "Solar radiation vaporizing their ice",
+                  "Magnetic fields in space",
+                  "Dust accumulating over time"
+                ],
+                "correct_answer": "Solar radiation vaporizing their ice"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Why can't asteroids develop glowing tails like comets?",
+                "options": [
+                  "They are too small to be visible",
+                  "They lack volatile ices",
+                  "They move too quickly through space",
+                  "They are made of pure metal"
+                ],
+                "correct_answer": "They lack volatile ices"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO statements about comets are true based on the conversation?",
+                "options": [
+                  "They originate from the asteroid belt",
+                  "They are nicknamed \"dirty snowballs\"",
+                  "Their tails always point away from Earth",
+                  "They can develop both dust and ion tails",
+                  "Famous examples include Hale-Bopp"
+                ],
+                "correct_answer": [
+                  "They are nicknamed \"dirty snowballs\"",
+                  "They can develop both dust and ion tails"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

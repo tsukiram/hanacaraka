@@ -1,0 +1,89 @@
+<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\speaking_test.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center mb-4">Speaking Comprehension Test - {{ set.set_name }}</h2>
+    <div class="container" 
+         data-transcribe-url="{{ url_for('test_speaking.transcribe') }}" 
+         data-submit-url="{{ url_for('test_speaking.submit') }}" 
+         data-results-url="{{ url_for('results.view_results') }}">
+        {% for task in set.tasks %}
+            <div class="card mb-4 shadow-sm" id="task-{{ task.task_number }}">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Task {{ task.task_number }}: {{ task.task_type|title }}</h5>
+                </div>
+                <div class="card-body">
+                    {% if task.question_type == 'with_audio' %}
+                        <div class="mb-3">
+                            <audio controls class="w-100">
+                                <source src="{{ url_for('static', filename=task.audio_path.lstrip('/')) }}" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <p class="mt-2">{{ task.audio_text }}</p>
+                        </div>
+                    {% endif %}
+                    <div class="mb-3">
+                        <strong>Prompt:</strong>
+                        <p class="text-primary">{{ task.prompt }}</p>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Preparation Time:</strong> {{ task.preparation_time }} seconds
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Response Time:</strong> {{ task.response_time }} seconds
+                        </div>
+                    </div>
+                    <!-- Timer and Sound Wave UI -->
+                    <div class="text-center mb-3">
+                        <div id="timer-{{ task.task_number }}" class="display-4 text-muted" role="timer" aria-live="polite">
+                            00:00
+                        </div>
+                        <div id="soundwave-{{ task.task_number }}" class="soundwave d-none">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                    <!-- Recording Controls -->
+                    <div class="text-center mb-3">
+                        <button class="btn btn-primary btn-lg start-recording" 
+                                data-task="{{ task.task_number }}"
+                                data-preparation="{{ task.preparation_time }}"
+                                data-response="{{ task.response_time }}"
+                                aria-label="Start recording for task {{ task.task_number }}">
+                            Start Recording
+                        </button>
+                        <button class="btn btn-danger btn-lg stop-recording d-none" 
+                                data-task="{{ task.task_number }}"
+                                aria-label="Stop recording for task {{ task.task_number }}">
+                            Stop Recording
+                        </button>
+                    </div>
+                    <!-- Playback and Transcription -->
+                    <div id="playback-{{ task.task_number }}" class="mb-3 d-none">
+                        <audio controls class="w-100"></audio>
+                        <div id="transcription-{{ task.task_number }}" class="border p-3 bg-light mt-2 d-none"></div>
+                    </div>
+                    <!-- Hidden Form per Task -->
+                    <form id="speakingForm-{{ task.task_number }}" class="d-none">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="set_name" value="{{ set.set_name }}">
+                        <input type="hidden" name="task_number" value="{{ task.task_number }}">
+                        <input type="hidden" name="transcription" value="">
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- Submit All Tasks Button -->
+        <div class="text-center mb-4">
+            <button id="submit-all-tasks" class="btn btn-success btn-lg" disabled
+                    aria-label="Submit all speaking tasks">
+                Submit All Tasks
+            </button>
+        </div>
+    </div>
+    <link href="{{ url_for('static', filename='css/speaking.css') }}?v=1.0" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/speaking.js') }}?v=1.0"></script>
+{% endblock %}

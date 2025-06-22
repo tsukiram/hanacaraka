@@ -1,0 +1,34 @@
+{
+  "writing_comprehension": [
+    {
+      "set_name": "Set 1",
+      "tasks": [
+        {
+          "task_number": 1,
+          "task_type": "report",
+          "subtype": "Integrated Writing",
+          "instructions": "Read the passage in 3 minutes, then write a summary (150–300 words) comparing the points in the lecture to the reading and explain how they contradict each other.",
+          "reading_passage": "Hydrogen cars are the best solution to replace fossil fuel vehicles. First, they emit only water, reducing air pollution. Second, hydrogen is abundant and can be produced from renewable energy. Finally, these cars have longer ranges than electric vehicles (EVs), making them practical for long trips. While hydrogen cars seem promising, they face significant challenges. First, producing hydrogen fuel requires massive energy, often from non-renewable sources, which contradicts the 'clean' claim. Second, hydrogen fueling stations are rare and expensive to build—currently, there are fewer than 100 in the U.S. Lastly, hydrogen is highly flammable, posing safety risks that EVs don't have. Thus, hydrogen cars may not be the ideal solution yet.",
+          "prompt": "Summarize the points made in the lecture and explain how they oppose the reading.",
+          "time_limit": 20,
+          "word_range": {
+            "min": 150,
+            "max": 300
+          }
+        },
+        {
+          "task_number": 2,
+          "task_type": "essay", 
+          "subtype": "Independent Writing",
+          "instructions": "Write an argumentative essay (at least 300 words) in 30 minutes. State your opinion, provide reasons, and support them with specific examples.",
+          "prompt": "Do you agree or disagree with the following statement? 'Technology has significantly improved the quality of education.' Use specific reasons and examples to support your answer.",
+          "time_limit": 30,
+          "word_range": {
+            "min": 300,
+            "max": 600
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,954 @@
+{
+    "toefl_question_bank": [
+      {
+        "set_name": "Set 1",
+        "passages": [
+          {
+            "passage_title": "The Industrial Revolution",
+            "passage_text": "The Industrial Revolution, which began in Britain in the late 18th century, marked a shift from agrarian economies to industrialized ones. Key innovations such as the steam engine, mechanized textile production, and improved iron-making techniques fueled this transformation. Factories replaced cottage industries, leading to urbanization as people moved to cities for work. While the Revolution increased productivity and technological advancement, it also caused poor working conditions, child labor, and environmental pollution.",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "Where did the Industrial Revolution begin?",
+                "options": [
+                  "a) France",
+                  "b) Germany",
+                  "c) Britain",
+                  "d) United States"
+                ],
+                "correct_answer": "c) Britain"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What was a major shift caused by the Industrial Revolution?",
+                "options": [
+                  "a) From industrial to agrarian economies",
+                  "b) From agrarian to industrialized economies",
+                  "c) From urban to rural living",
+                  "d) From manual labor to no labor"
+                ],
+                "correct_answer": "b) From agrarian to industrialized economies"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which innovation was NOT mentioned as a key driver of the Industrial Revolution?",
+                "options": [
+                  "a) The steam engine",
+                  "b) Mechanized textile production",
+                  "c) The telephone",
+                  "d) Improved iron-making techniques"
+                ],
+                "correct_answer": "c) The telephone"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What replaced cottage industries during the Industrial Revolution?",
+                "options": [
+                  "a) Small workshops",
+                  "b) Factories",
+                  "c) Agricultural farms",
+                  "d) Handicraft stores"
+                ],
+                "correct_answer": "b) Factories"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Why did people move to cities during the Industrial Revolution?",
+                "options": [
+                  "a) To escape pollution",
+                  "b) To find work in factories",
+                  "c) To enjoy better weather",
+                  "d) To avoid agricultural work"
+                ],
+                "correct_answer": "b) To find work in factories"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What was a negative effect of the Industrial Revolution?",
+                "options": [
+                  "a) Increased productivity",
+                  "b) Technological advancement",
+                  "c) Poor working conditions",
+                  "d) More leisure time"
+                ],
+                "correct_answer": "c) Poor working conditions"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which group was particularly exploited during the Industrial Revolution?",
+                "options": [
+                  "a) Government officials",
+                  "b) Children",
+                  "c) Wealthy merchants",
+                  "d) Farmers"
+                ],
+                "correct_answer": "b) Children"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What environmental issue arose due to the Industrial Revolution?",
+                "options": [
+                  "a) Deforestation",
+                  "b) Pollution",
+                  "c) Soil erosion",
+                  "d) Water scarcity"
+                ],
+                "correct_answer": "b) Pollution"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO innovations were crucial to the Industrial Revolution?",
+                "options": [
+                  "a) The steam engine",
+                  "b) The printing press",
+                  "c) Mechanized textile production",
+                  "d) The light bulb"
+                ],
+                "correct_answer": ["a) The steam engine", "c) Mechanized textile production"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What were TWO consequences of the Industrial Revolution?",
+                "options": [
+                  "a) Urbanization",
+                  "b) Decreased productivity",
+                  "c) Child labor",
+                  "d) Reduced pollution"
+                ],
+                "correct_answer": ["a) Urbanization", "c) Child labor"]
+              }
+            ]
+          },
+          {
+            "passage_title": "Climate Change and Coral Reefs",
+            "passage_text": "Coral reefs, often called the 'rainforests of the sea,' are highly sensitive to climate change. Rising ocean temperatures cause coral bleaching, where corals expel symbiotic algae, leading to whitening and death. Ocean acidification, caused by increased CO₂ absorption, weakens coral skeletons. Reefs also face threats from pollution and overfishing. Despite their ecological importance—providing habitat for marine life and protecting coastlines—scientists warn that without intervention, most reefs could vanish by 2100.",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What are coral reefs often referred to as?",
+                "options": [
+                  "a) The deserts of the sea",
+                  "b) The rainforests of the sea",
+                  "c) The mountains of the sea",
+                  "d) The savannas of the sea"
+                ],
+                "correct_answer": "b) The rainforests of the sea"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What happens to corals during bleaching?",
+                "options": [
+                  "a) They grow stronger",
+                  "b) They change color to red",
+                  "c) They expel symbiotic algae and turn white",
+                  "d) They produce more algae"
+                ],
+                "correct_answer": "c) They expel symbiotic algae and turn white"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the main cause of coral bleaching?",
+                "options": [
+                  "a) Decreased ocean salinity",
+                  "b) Rising ocean temperatures",
+                  "c) Reduced sunlight",
+                  "d) Overfishing"
+                ],
+                "correct_answer": "b) Rising ocean temperatures"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What effect does ocean acidification have on corals?",
+                "options": [
+                  "a) Makes them grow faster",
+                  "b) Weakens their skeletons",
+                  "c) Increases their resistance to disease",
+                  "d) Changes their color permanently"
+                ],
+                "correct_answer": "b) Weakens their skeletons"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What causes ocean acidification?",
+                "options": [
+                  "a) Decreased CO₂ levels",
+                  "b) Increased CO₂ absorption by oceans",
+                  "c) Higher oxygen levels",
+                  "d) Reduced pollution"
+                ],
+                "correct_answer": "b) Increased CO₂ absorption by oceans"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Besides climate change, what other threats do coral reefs face?",
+                "options": [
+                  "a) Pollution and overfishing",
+                  "b) Volcanic eruptions",
+                  "c) Excessive rainfall",
+                  "d) Low salinity"
+                ],
+                "correct_answer": "a) Pollution and overfishing"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "By what year do scientists predict most reefs could vanish without intervention?",
+                "options": [
+                  "a) 2050",
+                  "b) 2100",
+                  "c) 2200",
+                  "d) 2300"
+                ],
+                "correct_answer": "b) 2100"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO factors contribute to coral reef degradation?",
+                "options": [
+                  "a) Rising ocean temperatures",
+                  "b) Decreased CO₂ levels",
+                  "c) Ocean acidification",
+                  "d) Increased coral reproduction"
+                ],
+                "correct_answer": ["a) Rising ocean temperatures", "c) Ocean acidification"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What are THREE ecological roles of coral reefs mentioned in the passage?",
+                "options": [
+                  "a) Providing habitat for marine life",
+                  "b) Protecting coastlines",
+                  "c) Producing fresh water",
+                  "d) Supporting biodiversity"
+                ],
+                "correct_answer": ["a) Providing habitat for marine life", "b) Protecting coastlines", "d) Supporting biodiversity"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which of the following are consequences of coral bleaching?",
+                "options": [
+                  "a) Whitening of corals",
+                  "b) Increased fish populations",
+                  "c) Death of corals",
+                  "d) Stronger coral skeletons"
+                ],
+                "correct_answer": ["a) Whitening of corals", "c) Death of corals"]
+              }
+            ]
+          },
+          {
+            "passage_title": "The Great Depression",
+            "passage_text": "The Great Depression (1929–1939) was the worst economic downturn in modern history. Triggered by the stock market crash of 1929, it led to widespread unemployment, bank failures, and reduced industrial production. In the U.S., President Franklin D. Roosevelt's New Deal programs aimed to revive the economy through public works and financial reforms. Globally, the Depression contributed to political instability, paving the way for World War II. Recovery began only after increased wartime production in the 1940s.",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What was the primary catalyst for the Great Depression?",
+                "options": [
+                  "a) The outbreak of World War II",
+                  "b) The failure of New Deal programs",
+                  "c) The stock market crash of 1929",
+                  "d) Overproduction in agriculture"
+                ],
+                "correct_answer": "c) The stock market crash of 1929"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which U.S. president implemented the New Deal programs?",
+                "options": [
+                  "a) Herbert Hoover",
+                  "b) Franklin D. Roosevelt",
+                  "c) Woodrow Wilson",
+                  "d) Harry Truman"
+                ],
+                "correct_answer": "b) Franklin D. Roosevelt"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What was NOT a major consequence of the Great Depression mentioned in the passage?",
+                "options": [
+                  "a) Bank failures",
+                  "b) Political stability",
+                  "c) Reduced industrial production",
+                  "d) Widespread unemployment"
+                ],
+                "correct_answer": "b) Political stability"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "When did economic recovery from the Great Depression begin?",
+                "options": [
+                  "a) After the New Deal was implemented",
+                  "b) During the mid-1930s",
+                  "c) After increased wartime production in the 1940s",
+                  "d) Following the 1929 stock market crash"
+                ],
+                "correct_answer": "c) After increased wartime production in the 1940s"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "How did the Great Depression affect global politics according to the passage?",
+                "options": [
+                  "a) It strengthened democratic institutions worldwide",
+                  "b) It led to decreased military spending",
+                  "c) It contributed to political instability",
+                  "d) It encouraged international cooperation"
+                ],
+                "correct_answer": "c) It contributed to political instability"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What was the main purpose of Roosevelt's New Deal programs?",
+                "options": [
+                  "a) To prepare for World War II",
+                  "b) To punish financial institutions",
+                  "c) To revive the economy",
+                  "d) To reduce international trade"
+                ],
+                "correct_answer": "c) To revive the economy"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which THREE factors characterized the Great Depression?",
+                "options": [
+                  "a) Stock market speculation",
+                  "b) Widespread unemployment",
+                  "c) Bank failures",
+                  "d) Reduced industrial production"
+                ],
+                "correct_answer": ["b) Widespread unemployment", "c) Bank failures", "d) Reduced industrial production"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What TWO methods did the New Deal use to address the Depression?",
+                "options": [
+                  "a) Military expansion",
+                  "b) Public works programs",
+                  "c) Financial reforms",
+                  "d) Tax increases"
+                ],
+                "correct_answer": ["b) Public works programs", "c) Financial reforms"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which FOUR elements are mentioned in the passage about the Great Depression?",
+                "options": [
+                  "a) Duration (1929-1939)",
+                  "b) Stock market crash",
+                  "c) New Deal programs",
+                  "d) World War II connection",
+                  "e) Agricultural boom"
+                ],
+                "correct_answer": ["a) Duration (1929-1939)", "b) Stock market crash", "c) New Deal programs", "d) World War II connection"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What TWO global impacts did the Great Depression have?",
+                "options": [
+                  "a) Increased international trade",
+                  "b) Political instability",
+                  "c) Strengthened colonial systems",
+                  "d) Paved way for World War II"
+                ],
+                "correct_answer": ["b) Political instability", "d) Paved way for World War II"]
+              }
+            ]
+          },
+          {
+            "passage_title": "Photosynthesis",
+            "passage_text": "Photosynthesis is the process by which plants, algae, and some bacteria convert sunlight into chemical energy. Using chlorophyll, they absorb light to transform carbon dioxide and water into glucose and oxygen. This process occurs in chloroplasts and is vital for life on Earth, as it produces oxygen and forms the base of the food chain. Factors like light intensity, temperature, and CO₂ levels affect photosynthesis rates.",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the primary pigment involved in photosynthesis?",
+                "options": [
+                  "a) Carotenoid",
+                  "b) Chlorophyll",
+                  "c) Xanthophyll",
+                  "d) Phycobilin"
+                ],
+                "correct_answer": "b) Chlorophyll"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which of the following is NOT a direct product of photosynthesis?",
+                "options": [
+                  "a) Glucose",
+                  "b) Oxygen",
+                  "c) Carbon dioxide",
+                  "d) Chemical energy"
+                ],
+                "correct_answer": "c) Carbon dioxide"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Where does photosynthesis primarily occur in plant cells?",
+                "options": [
+                  "a) Mitochondria",
+                  "b) Nucleus",
+                  "c) Chloroplasts",
+                  "d) Ribosomes"
+                ],
+                "correct_answer": "c) Chloroplasts"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What makes photosynthesis fundamental to Earth's ecosystems?",
+                "options": [
+                  "a) It reduces atmospheric nitrogen",
+                  "b) It produces oxygen and forms the food chain base",
+                  "c) It regulates Earth's temperature",
+                  "d) It creates ozone layer"
+                ],
+                "correct_answer": "b) It produces oxygen and forms the food chain base"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which factor does NOT typically affect photosynthesis rates?",
+                "options": [
+                  "a) Light intensity",
+                  "b) Soil pH",
+                  "c) Temperature",
+                  "d) CO₂ concentration"
+                ],
+                "correct_answer": "b) Soil pH"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which THREE organisms are capable of photosynthesis?",
+                "options": [
+                  "a) Flowering plants",
+                  "b) Fungi",
+                  "c) Cyanobacteria",
+                  "d) Marine algae"
+                ],
+                "correct_answer": ["a) Flowering plants", "c) Cyanobacteria", "d) Marine algae"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What TWO raw materials are required for photosynthesis?",
+                "options": [
+                  "a) Oxygen",
+                  "b) Carbon dioxide",
+                  "c) Glucose",
+                  "d) Water"
+                ],
+                "correct_answer": ["b) Carbon dioxide", "d) Water"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which FOUR elements are mentioned in the passage about photosynthesis?",
+                "options": [
+                  "a) Light absorption",
+                  "b) ATP production",
+                  "c) Chlorophyll involvement",
+                  "d) Oxygen production",
+                  "e) Food chain importance"
+                ],
+                "correct_answer": ["a) Light absorption", "c) Chlorophyll involvement", "d) Oxygen production", "e) Food chain importance"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What THREE factors affect photosynthesis rates according to the passage?",
+                "options": [
+                  "a) Wind speed",
+                  "b) Light intensity",
+                  "c) Temperature",
+                  "d) CO₂ levels"
+                ],
+                "correct_answer": ["b) Light intensity", "c) Temperature", "d) CO₂ levels"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO statements correctly describe photosynthesis' role?",
+                "options": [
+                  "a) It converts chemical energy to mechanical energy",
+                  "b) It transforms sunlight into chemical energy",
+                  "c) It reduces atmospheric oxygen levels",
+                  "d) It forms the base of most food chains"
+                ],
+                "correct_answer": ["b) It transforms sunlight into chemical energy", "d) It forms the base of most food chains"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "set_name": "Set 2",
+        "passages": [
+          {
+            "passage_title": "The Rise of Telecommuting",
+            "passage_text": "The advent of high-speed internet and digital communication tools has revolutionized the modern workplace, enabling telecommuting—working remotely outside traditional offices. Companies now leverage platforms like Zoom and Slack to maintain productivity, while employees enjoy flexibility and reduced commute times. Studies show that telecommuting can increase job satisfaction by 20%, but challenges such as isolation, blurred work-life boundaries, and cybersecurity risks persist. Economists predict that by 2030, over 50% of the global workforce will telecommute at least part-time, signaling a permanent shift in work culture.",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the main topic of the passage?",
+                "options": [
+                  "a) The history of office buildings",
+                  "b) The impact of telecommuting on work culture",
+                  "c) The dangers of internet use",
+                  "d) The decline of job satisfaction"
+                ],
+                "correct_answer": "b) The impact of telecommuting on work culture"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which technology is NOT mentioned as facilitating telecommuting?",
+                "options": [
+                  "a) Zoom",
+                  "b) Slack",
+                  "c) Blockchain",
+                  "d) High-speed internet"
+                ],
+                "correct_answer": "c) Blockchain"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "The word 'leveraged' in the passage is closest in meaning to:",
+                "options": [
+                  "a) Ignored",
+                  "b) Utilized",
+                  "c) Invented",
+                  "d) Replaced"
+                ],
+                "correct_answer": "b) Utilized"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "According to studies, what is one benefit of telecommuting?",
+                "options": [
+                  "a) Higher salaries",
+                  "b) Increased job satisfaction",
+                  "c) Fewer meetings",
+                  "d) Reduced internet usage"
+                ],
+                "correct_answer": "b) Increased job satisfaction"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which challenge of telecommuting is highlighted?",
+                "options": [
+                  "a) Lack of technology",
+                  "b) Workplace isolation",
+                  "c) Longer working hours",
+                  "d) Higher office costs"
+                ],
+                "correct_answer": "b) Workplace isolation"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What prediction do economists make about telecommuting?",
+                "options": [
+                  "a) It will disappear by 2030",
+                  "b) Over 50% of workers will do it part-time",
+                  "c) Offices will become obsolete",
+                  "d) It will cause unemployment"
+                ],
+                "correct_answer": "b) Over 50% of workers will do it part-time"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "The phrase 'blurred work-life boundaries' refers to:",
+                "options": [
+                  "a) Difficulty separating personal and professional time",
+                  "b) Clearer job descriptions",
+                  "c) Shorter workdays",
+                  "d) Increased vacation time"
+                ],
+                "correct_answer": "a) Difficulty separating personal and professional time"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Why might telecommuting pose cybersecurity risks?",
+                "options": [
+                  "a) Employees use slower internet",
+                  "b) Remote networks may be less secure",
+                  "c) Companies reduce IT budgets",
+                  "d) Hackers avoid remote workers"
+                ],
+                "correct_answer": "b) Remote networks may be less secure"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which THREE benefits of telecommuting are implied in the passage?",
+                "options": [
+                  "a) Increased productivity",
+                  "b) Greater flexibility",
+                  "c) Higher job satisfaction",
+                  "d) Reduced equipment costs"
+                ],
+                "correct_answer": ["a) Increased productivity", "b) Greater flexibility", "c) Higher job satisfaction"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What TWO challenges does telecommuting present?",
+                "options": [
+                  "a) Feelings of isolation",
+                  "b) Language barriers",
+                  "c) Work-life balance issues",
+                  "d) Technical incompetence"
+                ],
+                "correct_answer": ["a) Feelings of isolation", "c) Work-life balance issues"]
+              }
+            ]
+          },
+          {
+            "passage_title": "The Silk Road's Historical Impact",
+            "passage_text": "The Silk Road, a network of trade routes connecting Asia and Europe from 130 BCE to 1453 CE, facilitated not only the exchange of goods like silk and spices but also ideas, religions, and technologies. Buddhism spread from India to China via these routes, while papermaking traveled westward. The Mongol Empire's unification of much of the Silk Road in the 13th century boosted safe travel, but the Black Death and the rise of maritime trade led to its decline. Today, China's 'Belt and Road Initiative' revives this ancient concept through modern infrastructure projects.",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What was the primary function of the Silk Road?",
+                "options": [
+                  "a) Military conquest",
+                  "b) Cultural and trade exchange",
+                  "c) Religious conversion",
+                  "d) Political alliances"
+                ],
+                "correct_answer": "b) Cultural and trade exchange"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which item was NOT traded on the Silk Road?",
+                "options": [
+                  "a) Silk",
+                  "b) Spices",
+                  "c) Plastic",
+                  "d) Paper"
+                ],
+                "correct_answer": "c) Plastic"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "The word 'facilitated' in the passage is closest in meaning to:",
+                "options": [
+                  "a) Prevented",
+                  "b) Enabled",
+                  "c) Complicated",
+                  "d) Ignored"
+                ],
+                "correct_answer": "b) Enabled"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "How did the Mongol Empire affect the Silk Road?",
+                "options": [
+                  "a) It destroyed the routes",
+                  "b) It increased security for travelers",
+                  "c) It banned trade",
+                  "d) It introduced maritime alternatives"
+                ],
+                "correct_answer": "b) It increased security for travelers"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What caused the decline of the Silk Road?",
+                "options": [
+                  "a) The invention of airplanes",
+                  "b) The Black Death and maritime trade",
+                  "c) Overproduction of silk",
+                  "d) Religious conflicts"
+                ],
+                "correct_answer": "b) The Black Death and maritime trade"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which modern policy mirrors the Silk Road's concept?",
+                "options": [
+                  "a) The United Nations",
+                  "b) China's Belt and Road Initiative",
+                  "c) The European Union",
+                  "d) NATO expansion"
+                ],
+                "correct_answer": "b) China's Belt and Road Initiative"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What cultural spread is mentioned in the passage?",
+                "options": [
+                  "a) Christianity to India",
+                  "b) Buddhism to China",
+                  "c) Islam to Europe",
+                  "d) Hinduism to Persia"
+                ],
+                "correct_answer": "b) Buddhism to China"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which THREE commodities/ideas were exchanged along the Silk Road according to the passage?",
+                "options": [
+                  "a) Islamic architecture",
+                  "b) Buddhism",
+                  "c) Gunpowder technology",
+                  "d) Papermaking techniques",
+                  "e) Maritime navigation charts",
+                  "f) Silk and spices"
+                ],
+                "correct_answer": ["b) Buddhism", "d) Papermaking techniques", "f) Silk and spices"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What TWO major historical developments affected the Silk Road's prominence?",
+                "options": [
+                  "a) The Roman Empire's expansion",
+                  "b) The Mongol Empire's unification",
+                  "c) The invention of the printing press",
+                  "d) The Black Death pandemic",
+                  "e) The Industrial Revolution"
+                ],
+                "correct_answer": ["b) The Mongol Empire's unification", "d) The Black Death pandemic"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which of the following BEST describes the modern parallel to the Silk Road mentioned in the passage?",
+                "options": [
+                  "a) International space collaborations",
+                  "b) Global digital payment systems",
+                  "c) China's Belt and Road Initiative",
+                  "d) Transcontinental railway projects",
+                  "e) Worldwide cultural exchange programs"
+                ],
+                "correct_answer": ["c) China's Belt and Road Initiative"]
+              }
+            ]
+          },
+          {
+            "passage_title": "The Psychology of Decision-Making",
+            "passage_text": "Human decision-making is influenced by cognitive biases—systematic errors in thinking that affect judgments. For example, the 'confirmation bias' leads people to favor information that confirms their preexisting beliefs, while the 'sunk cost fallacy' makes them continue unprofitable endeavors due to prior investments. Nobel Prize-winning psychologist Daniel Kahneman demonstrated that humans rely on two systems: fast, intuitive thinking (System 1) and slow, logical analysis (System 2). Understanding these biases can improve financial, medical, and political decisions, yet overcoming them requires conscious effort.",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the main idea of the passage?",
+                "options": [
+                  "a) Cognitive biases always lead to correct decisions",
+                  "b) Human decision-making is flawed but can be improved",
+                  "c) Daniel Kahneman invented System 1 and System 2",
+                  "d) Only experts are affected by cognitive biases"
+                ],
+                "correct_answer": "b) Human decision-making is flawed but can be improved"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which bias causes people to ignore opposing evidence?",
+                "options": [
+                  "a) Sunk cost fallacy",
+                  "b) Confirmation bias",
+                  "c) System 1 thinking",
+                  "d) Logical analysis"
+                ],
+                "correct_answer": "b) Confirmation bias"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "The word 'endeavors' in the passage is closest in meaning to:",
+                "options": [
+                  "a) Mistakes",
+                  "b) Investments",
+                  "c) Projects",
+                  "d) Theories"
+                ],
+                "correct_answer": "c) Projects"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What does the 'sunk cost fallacy' refer to?",
+                "options": [
+                  "a) Avoiding new investments",
+                  "b) Continuing a failing project due to past costs",
+                  "c) Making decisions based on logic",
+                  "d) Ignoring all financial risks"
+                ],
+                "correct_answer": "b) Continuing a failing project due to past costs"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "How does System 1 thinking operate?",
+                "options": [
+                  "a) Slowly and analytically",
+                  "b) Intuitively and quickly",
+                  "c) Only in financial decisions",
+                  "d) Without any biases"
+                ],
+                "correct_answer": "b) Intuitively and quickly"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which field is NOT mentioned as benefiting from understanding biases?",
+                "options": [
+                  "a) Finance",
+                  "b) Medicine",
+                  "c) Engineering",
+                  "d) Politics"
+                ],
+                "correct_answer": "c) Engineering"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO cognitive biases are specifically mentioned in the passage?",
+                "options": [
+                  "a) Hindsight bias",
+                  "b) Confirmation bias",
+                  "c) Anchoring effect",
+                  "d) Sunk cost fallacy",
+                  "e) Availability heuristic"
+                ],
+                "correct_answer": ["b) Confirmation bias", "d) Sunk cost fallacy"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What did Daniel Kahneman's research demonstrate about human decision-making?",
+                "options": [
+                  "a) People use only logical analysis",
+                  "b) Decisions are always rational",
+                  "c) Two thinking systems exist",
+                  "d) System 1 is fast and intuitive",
+                  "e) System 2 is slow and analytical"
+                ],
+                "correct_answer": ["c) Two thinking systems exist", "d) System 1 is fast and intuitive", "e) System 2 is slow and analytical"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "In which THREE fields can understanding cognitive biases improve decision-making?",
+                "options": [
+                  "a) Financial",
+                  "b) Educational",
+                  "c) Medical",
+                  "d) Political",
+                  "e) Agricultural"
+                ],
+                "correct_answer": ["a) Financial", "c) Medical", "d) Political"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What is required to overcome cognitive biases according to the passage?",
+                "options": [
+                  "a) Higher intelligence",
+                  "b) Specialized training",
+                  "c) Conscious effort",
+                  "d) Technological assistance",
+                  "e) Group consensus"
+                ],
+                "correct_answer": ["c) Conscious effort"]
+              }
+            ]
+          },
+          {
+            "passage_title": "Renewable Energy Innovations",
+            "passage_text": "Recent advancements in renewable energy aim to combat climate change by replacing fossil fuels. Solar panels now use perovskite materials to achieve 30% efficiency, doubling traditional rates. Wind turbines with vertical designs generate power even in low-wind areas. However, challenges like energy storage intermittency and high initial costs persist. Governments incentivize adoption through subsidies, while critics argue nuclear power is more reliable. Despite debates, renewables accounted for 29% of global electricity in 2022, signaling a transition toward sustainability.",
+            "questions": [
+              {
+                "question_type": "single_choice",
+                "question_text": "What is the primary goal of renewable energy innovations?",
+                "options": [
+                  "a) To increase fossil fuel use",
+                  "b) To reduce climate change impacts",
+                  "c) To lower electricity costs immediately",
+                  "d) To replace all nuclear power"
+                ],
+                "correct_answer": "b) To reduce climate change impacts"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which material improves solar panel efficiency?",
+                "options": [
+                  "a) Silicon",
+                  "b) Perovskite",
+                  "c) Coal",
+                  "d) Aluminum"
+                ],
+                "correct_answer": "b) Perovskite"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "The word 'intermittency' in the passage is closest in meaning to:",
+                "options": [
+                  "a) Consistency",
+                  "b) Unpredictability",
+                  "c) Abundance",
+                  "d) Speed"
+                ],
+                "correct_answer": "b) Unpredictability"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "What advantage do vertical wind turbines have?",
+                "options": [
+                  "a) They require no wind",
+                  "b) They operate in low-wind conditions",
+                  "c) They are cheaper than solar panels",
+                  "d) They store energy indefinitely"
+                ],
+                "correct_answer": "b) They operate in low-wind conditions"
+              },
+              {
+                "question_type": "single_choice",
+                "question_text": "Which issue is NOT mentioned as a challenge for renewables?",
+                "options": [
+                  "a) High upfront costs",
+                  "b) Energy storage limitations",
+                  "c) Public opposition",
+                  "d) Intermittent energy supply"
+                ],
+                "correct_answer": "c) Public opposition"
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO technological advancements in renewable energy are specifically mentioned in the passage?",
+                "options": [
+                  "a) Floating solar farms",
+                  "b) Perovskite solar panels",
+                  "c) Vertical-axis wind turbines",
+                  "d) Geothermal drilling tech",
+                  "e) Hydrogen fuel cells"
+                ],
+                "correct_answer": ["b) Perovskite solar panels", "c) Vertical-axis wind turbines"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What percentage efficiency improvement do perovskite solar panels offer compared to traditional ones?",
+                "options": [
+                  "a) 15% increase",
+                  "b) 30% increase (doubling traditional rates)",
+                  "c) 50% increase",
+                  "d) 100% increase"
+                ],
+                "correct_answer": ["b) 30% increase (doubling traditional rates)"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What are the TWO main challenges facing renewable energy mentioned in the passage?",
+                "options": [
+                  "a) Energy storage intermittency",
+                  "b) High initial costs",
+                  "c) Limited sunlight availability",
+                  "d) Noise pollution"
+                ],
+                "correct_answer": ["a) Energy storage intermittency", "b) High initial costs"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "What was the global share of renewable energy in electricity generation in 2022 according to the passage?",
+                "options": [
+                  "a) 22%",
+                  "b) 25%",
+                  "c) 29%",
+                  "d) 33%"
+                ],
+                "correct_answer": ["c) 29%"]
+              },
+              {
+                "question_type": "multiple_choice",
+                "question_text": "Which TWO perspectives on renewable energy adoption are presented in the passage?",
+                "options": [
+                  "a) Environmentalists oppose all renewables",
+                  "b) Governments offer subsidies",
+                  "c) Critics favor nuclear power",
+                  "d) Businesses reject all incentives",
+                  "e) Scientists doubt climate benefits"
+                ],
+                "correct_answer": ["b) Governments offer subsidies", "c) Critics favor nuclear power"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

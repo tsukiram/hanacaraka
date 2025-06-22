@@ -1,0 +1,58 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% block title %}Hanacaraka - Home{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Welcome to HANACARAKA</h1>
+        <p class="lead text-center">Test your English proficiency with our comprehensive Reading, Listening, Speaking, and Writing tests, designed to mirror the IELTS format.</p>
+        <div class="row mt-5">
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Reading Test</h5>
+                        <p class="card-text">Assess your reading comprehension with IELTS-style passages and questions.</p>
+                        <a href="{{ url_for('test_reading.reading') }}" class="btn btn-primary">Start Reading Test</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Listening Test</h5>
+                        <p class="card-text">Evaluate your listening skills with audio clips and related questions.</p>
+                        <a href="{{ url_for('test_listening.listening') }}" class="btn btn-primary">Start Listening Test</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Speaking Test</h5>
+                        <p class="card-text">Practice your speaking abilities with recorded responses evaluated by AI.</p>
+                        <a href="{{ url_for('test_speaking.speaking') }}" class="btn btn-primary">Start Speaking Test</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Writing Test</h5>
+                        <p class="card-text">Test your writing skills with IELTS-style essay and task prompts.</p>
+                        <a href="{{ url_for('test_writing.writing') }}" class="btn btn-primary">Start Writing Test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">View Results</h5>
+                        <p class="card-text">Check your test history and scores to track your progress.</p>
+                        <a href="{{ url_for('results.view_results') }}" class="btn btn-primary">View Results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

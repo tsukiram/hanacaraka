@@ -1,0 +1,27 @@
+{
+  "reading_comprehension": [
+    {
+      "set_name": "Set 1",
+      "passages": [
+        {
+          "passage_title": "The Industrial Revolution",
+          "passage_text": "The Industrial Revolution, which began in Britain in the late 18th century...",
+          "questions": [
+            {
+              "question_type": "single_choice",
+              "question_text": "Where did the Industrial Revolution begin?",
+              "options": ["France", "Germany", "Britain", "United States"],
+              "correct_answer": "Britain"
+            },
+            {
+              "question_type": "multiple_choice",
+              "question_text": "Which issues were caused by the Industrial Revolution?",
+              "options": ["Poor working conditions", "Child labor", "Environmental pollution", "Increased productivity"],
+              "correct_answer": ["Poor working conditions", "Child labor", "Environmental pollution"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
