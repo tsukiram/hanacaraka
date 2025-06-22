@@ -1,7 +1,8 @@
+# C:\Users\rama\Desktop\hanacaraka\HANACARAKA\routes\auth.py
 import logging
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required, current_user  # Added current_user
+from flask_login import login_user, logout_user, login_required, current_user
 from models import User
 from extensions import db
 
@@ -12,6 +13,9 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        logger.debug(f"User {current_user.username} already authenticated, redirecting to home")
+        return redirect(url_for('home.home_page'))  # Redirect jika sudah login
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -24,7 +28,7 @@ def login():
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
             logger.debug(f"User {username} logged in successfully")
-            next_page = request.args.get('next', url_for('tests.home'))
+            next_page = request.args.get('next', url_for('home.home_page'))  # Perbaiki endpoint
             return redirect(next_page)
         flash('Invalid username or password')
         logger.error(f"Failed login attempt for username: {username}")
@@ -32,6 +36,9 @@ def login():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        logger.debug(f"User {current_user.username} already authenticated, redirecting to home")
+        return redirect(url_for('home.home_page'))  # Redirect jika sudah login
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
