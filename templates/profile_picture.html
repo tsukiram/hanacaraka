@@ -1,11 +1,13 @@
-<!-- templates/profile_picture.html -->
+<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\profile_picture.html -->
 {% extends 'base.html' %}
 {% block content %}
     <div class="container mt-5">
         <h2 class="text-center mb-4">Upload Profile Picture</h2>
         <div class="card mx-auto" style="max-width: 500px;">
             <div class="card-body">
-                <form id="uploadForm" enctype="multipart/form-data">
+                <form id="uploadForm" enctype="multipart/form-data" 
+                      data-upload-url="{{ url_for('profile.upload_profile_picture') }}"
+                      data-csrf-token="{{ csrf_token() }}">
                     <div class="mb-3">
                         <label for="profile_image" class="form-label">Choose Image (JPG or PNG, max 5MB)</label>
                         <input type="file" class="form-control" id="profile_image" name="profile_image" accept=".jpg,.jpeg,.png" required>
@@ -20,5 +22,5 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/profile_picture.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/profile_picture.js') }}?v=1.0"></script>
 {% endblock %}
