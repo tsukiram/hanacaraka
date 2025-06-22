@@ -1,6 +1,8 @@
+
 <!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\speaking_test.html -->
 {% extends 'base.html' %}
-{% block content %}
+{% block title %}Speaking Test - Hanacaraka{% endblock %}
+{% block main_content %}
     <h2 class="text-center mb-4">Speaking Comprehension Test - {{ set.set_name }}</h2>
     <div class="container" 
          data-transcribe-url="{{ url_for('test_speaking.transcribe') }}" 

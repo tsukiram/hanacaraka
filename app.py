@@ -49,6 +49,7 @@ from routes.test_listening import test_listening
 from routes.test_speaking import test_speaking
 from routes.test_writing import test_writing
 from routes.sinta import sinta
+from routes.users import users
 
 # Register blueprints
 app.register_blueprint(auth, url_prefix='/auth')
@@ -60,6 +61,7 @@ app.register_blueprint(test_listening, url_prefix='/tests/listening')
 app.register_blueprint(test_speaking, url_prefix='/tests/speaking')
 app.register_blueprint(test_writing, url_prefix='/tests/writing')
 app.register_blueprint(sinta, url_prefix='/sinta')
+app.register_blueprint(users, url_prefix='/users')
 
 # Create database tables if they don't exist
 with app.app_context():

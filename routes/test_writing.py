@@ -1,12 +1,14 @@
-# routes/test_writing.py
+# C:\Users\rama\Desktop\hanacaraka\HANACARAKA\routes\test_writing.py
 from flask import Blueprint, render_template, jsonify, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from extensions import db
-from models import TestResult
+from models import TestResult, UserStatus
+from utils import load_json_data
 from config import Config
 import logging
 import json
 import random
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -17,16 +19,27 @@ test_writing = Blueprint('test_writing', __name__)
 def writing():
     logger.debug(f"User {current_user.id} accessed writing route")
     try:
-        logger.debug("Attempting to load writing.json")
-        with open('static/datasets/writing.json') as f:
-            data = json.load(f)
-        logger.debug(f"Loaded writing.json: {len(data['writing_comprehension'])} sets")
-        set = random.choice(data['writing_comprehension'])
-        logger.debug(f"Selected writing set: {set['set_name']}, tasks: {len(set['tasks'])}")
-        word_ranges = {str(task['task_number']): {'min': task['word_range']['min'], 'max': task['word_range']['max']} for task in set['tasks']}
+        data = load_json_data('static/datasets/writing.json')
+        sets = data.get('writing_comprehension', [])
+        if not sets:
+            raise ValueError("No writing comprehension sets found")
+        logger.debug(f"Loaded writing.json: {len(sets)} sets")
+        selected_set = random.choice(sets)
+        logger.debug(f"Selected writing set: {selected_set['set_name']}, tasks: {len(selected_set['tasks'])}")
+        word_ranges = {str(task['task_number']): {'min': task['word_range']['min'], 'max': task['word_range']['max']} for task in selected_set['tasks']}
         logger.debug(f"Word ranges: {word_ranges}")
-        return render_template('writing_test.html', set=set, word_ranges=word_ranges)
-    except (FileNotFoundError, KeyError, json.JSONDecodeError) as e:
+        
+        # Set active test in UserStatus
+        status = UserStatus.query.filter_by(user_id=current_user.id).first()
+        if not status:
+            status = UserStatus(user_id=current_user.id)
+            db.session.add(status)
+        status.active_test_id = None  # Temporary, will set after result creation
+        status.updated_at = datetime.utcnow()
+        db.session.commit()
+        
+        return render_template('writing_test.html', set=selected_set, word_ranges=word_ranges)
+    except Exception as e:
         logger.error(f"Error loading writing test: {str(e)}", exc_info=True)
         flash(f'Error loading writing test: {str(e)}', 'error')
         return redirect(url_for('home.home_page'))
@@ -36,17 +49,14 @@ def writing():
 def submit_writing():
     logger.debug(f"User {current_user.id} submitted writing test")
     try:
-        logger.debug("Received POST request to /submit_writing")
         set_name = request.form.get('set_name')
         form_data = request.form.to_dict()
-        logger.debug(f"Form data received: set_name={set_name}, full_form={form_data}")
+        logger.debug(f"Writing submission: set_name={set_name}, form_data={form_data}")
         if not set_name:
             logger.error("Missing set_name")
             return jsonify({'error': 'Missing set name.'}), 400
 
-        logger.debug("Loading writing.json for submission")
-        with open('static/datasets/writing.json') as f:
-            data = json.load(f)
+        data = load_json_data('static/datasets/writing.json')
         set_data = next((s for s in data['writing_comprehension'] if s['set_name'] == set_name), None)
         if not set_data:
             logger.error(f"No test set found for set_name: {set_name}")
@@ -64,8 +74,7 @@ def submit_writing():
 
             logger.debug(f"Received answer for task {task_number}: {answer[:100]}...")
 
-            logger.debug("Loading writing system prompt")
-            with open('prompt/writing.txt') as f:
+            with open('prompt/writing.txt', 'r') as f:
                 system_prompt = f.read()
             logger.debug(f"System prompt: {system_prompt[:100]}...")
 
@@ -99,7 +108,7 @@ def submit_writing():
                 logger.debug(f"Processed score for task {task_number}: {score}")
             except Exception as api_error:
                 logger.error(f"Groq API error for task {task_number}: {str(api_error)}", exc_info=True)
-                return jsonify({'error': f'Error calling Groq API for task {task_number}: {str(api_error)}'}), 500
+                return jsonify({'error': f'Failed to evaluate task {task_number}: {str(api_error)}'}), 500
 
         overall_score = sum(score['overall'] for score in scores) / len(scores)
         logger.debug(f"Overall test score: {overall_score}")
@@ -111,20 +120,37 @@ def submit_writing():
             score={
                 'tasks': scores,
                 'overall': overall_score
-            }
+            },
+            is_public=False  # Default to private
         )
-        logger.debug(f"Creating TestResult for user {current_user.id}, set_name: {set_name}")
         db.session.add(result)
+        
+        # Update UserStatus with active test
+        status = UserStatus.query.filter_by(user_id=current_user.id).first()
+        if not status:
+            status = UserStatus(user_id=current_user.id)
+            db.session.add(status)
+        status.active_test_id = result.id
+        status.updated_at = datetime.utcnow()
+        
         try:
             db.session.commit()
-            logger.debug(f"Test result saved for user {current_user.id}, set_name: {set_name}")
+            logger.debug(f"Writing result saved for user {current_user.id}, set_name: {set_name}")
+            
+            # Reset active test after submission
+            status.active_test_id = None
+            status.updated_at = datetime.utcnow()
+            db.session.commit()
         except Exception as db_error:
             db.session.rollback()
             logger.error(f"Database error: {str(db_error)}", exc_info=True)
-            return jsonify({'error': f'Database error: {str(db_error)}'}), 500
+            return jsonify({'error': 'Failed to save result due to database error.'}), 500
 
-        logger.debug(f"Returning scores: {scores}, overall_score: {overall_score}")
-        return jsonify({'scores': scores, 'overall_score': overall_score})
+        return jsonify({
+            'scores': scores,
+            'overall_score': overall_score,
+            'message': 'Writing test submitted successfully'
+        })
     except Exception as e:
         logger.error(f"Error in submit_writing: {str(e)}", exc_info=True)
-        return jsonify({'error': f'Error processing writing test: {str(e)}'}), 500
+        return jsonify({'error': f'Failed to process writing test: {str(e)}'}), 500

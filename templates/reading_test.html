@@ -1,6 +1,8 @@
-<!-- templates/reading_test.html -->
+
+<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\reading_test.html -->
 {% extends 'base.html' %}
-{% block content %}
+{% block title %}Reading Test - Hanacaraka{% endblock %}
+{% block main_content %}
     <h2 class="text-center">Reading Comprehension Test - {{ set.set_name }}</h2>
     <form id="readingForm" method="POST" data-submit-url="{{ url_for('test_reading.submit_reading') }}" data-results-url="{{ url_for('results.view_results') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

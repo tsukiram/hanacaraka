@@ -1,12 +1,14 @@
 # C:\Users\rama\Desktop\hanacaraka\HANACARAKA\routes\test_speaking.py
 from flask import Blueprint, render_template, jsonify, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from extensions import db, csrf
-from models import TestResult
+from extensions import db
+from models import TestResult, UserStatus
+from utils import load_json_data
 from config import Config
 import logging
 import json
 import random
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -17,20 +19,31 @@ test_speaking = Blueprint('test_speaking', __name__)
 def speaking():
     logger.debug(f"User {current_user.id} accessed speaking route")
     try:
-        with open('static/datasets/speaking.json') as f:
-            data = json.load(f)
-        logger.debug(f"Loaded speaking.json: {len(data['speaking_comprehension'])} sets")
-        set = random.choice(data['speaking_comprehension'])
-        logger.debug(f"Selected speaking set: {set['set_name']}")
-        return render_template('speaking_test.html', set=set)
-    except (FileNotFoundError, KeyError, json.JSONDecodeError) as e:
+        data = load_json_data('static/datasets/speaking.json')
+        sets = data.get('speaking_comprehension', [])
+        if not sets:
+            raise ValueError("No speaking comprehension sets found")
+        logger.debug(f"Loaded speaking.json: {len(sets)} sets")
+        selected_set = random.choice(sets)
+        logger.debug(f"Selected speaking set: {selected_set['set_name']}")
+        
+        # Set active test in UserStatus
+        status = UserStatus.query.filter_by(user_id=current_user.id).first()
+        if not status:
+            status = UserStatus(user_id=current_user.id)
+            db.session.add(status)
+        status.active_test_id = None  # Temporary, will set after result creation
+        status.updated_at = datetime.utcnow()
+        db.session.commit()
+        
+        return render_template('speaking_test.html', set=selected_set)
+    except Exception as e:
         logger.error(f"Error loading speaking test: {str(e)}", exc_info=True)
         flash(f'Error loading speaking test: {str(e)}', 'error')
         return redirect(url_for('home.home_page'))
 
 @test_speaking.route('/transcribe', methods=['POST'])
 @login_required
-@csrf.exempt
 def transcribe():
     logger.debug(f"User {current_user.id} requested audio transcription")
     try:
@@ -40,6 +53,10 @@ def transcribe():
             return jsonify({'error': 'Missing audio file.'}), 400
 
         audio_data = audio.read()
+        if len(audio_data) > 5 * 1024 * 1024:  # 5MB limit
+            logger.error("Audio file too large")
+            return jsonify({'error': 'Audio file exceeds 5MB limit.'}), 400
+            
         audio_filename = audio.filename or 'audio.webm'
         mime_type = audio.content_type or 'audio/webm'
 
@@ -55,24 +72,21 @@ def transcribe():
         return jsonify({'transcription': transcription})
     except Exception as e:
         logger.error(f"Error transcribing audio: {str(e)}", exc_info=True)
-        return jsonify({'error': f'Error transcribing audio: {str(e)}'}), 500
+        return jsonify({'error': f'Failed to transcribe audio: {str(e)}'}), 500
 
 @test_speaking.route('/submit', methods=['POST'])
 @login_required
-@csrf.exempt
 def submit():
     logger.debug(f"User {current_user.id} submitted speaking test")
     try:
         set_name = request.form.get('set_name')
         form_data = request.form.to_dict()
         logger.debug(f"Speaking submission: set_name={set_name}, form_data={form_data}")
-
         if not set_name:
             logger.error("Missing set_name")
             return jsonify({'error': 'Missing set name.'}), 400
 
-        with open('static/datasets/speaking.json') as f:
-            data = json.load(f)
+        data = load_json_data('static/datasets/speaking.json')
         set_data = next((s for s in data['speaking_comprehension'] if s['set_name'] == set_name), None)
         if not set_data:
             logger.error(f"No test set found for set_name: {set_name}")
@@ -114,27 +128,45 @@ def submit():
             score={
                 'tasks': scores,
                 'overall': overall_score
-            }
+            },
+            is_public=False  # Default to private
         )
         db.session.add(result)
+        
+        # Update UserStatus with active test
+        status = UserStatus.query.filter_by(user_id=current_user.id).first()
+        if not status:
+            status = UserStatus(user_id=current_user.id)
+            db.session.add(status)
+        status.active_test_id = result.id
+        status.updated_at = datetime.utcnow()
+        
         try:
             db.session.commit()
             logger.debug(f"Speaking result saved for user {current_user.id}, set_name: {set_name}")
+            
+            # Reset active test after submission
+            status.active_test_id = None
+            status.updated_at = datetime.utcnow()
+            db.session.commit()
         except Exception as db_error:
             db.session.rollback()
             logger.error(f"Database error: {str(db_error)}", exc_info=True)
-            return jsonify({'error': f'Database error: {str(db_error)}'}), 500
+            return jsonify({'error': 'Failed to save result due to database error.'}), 500
 
-        return jsonify({'scores': [score['scores'] for score in scores], 'overall_score': overall_score})
+        return jsonify({
+            'scores': [score['scores'] for score in scores],
+            'overall_score': overall_score,
+            'message': 'Speaking test submitted successfully'
+        })
     except Exception as e:
         logger.error(f"Error in submit_speaking: {str(e)}", exc_info=True)
-        return jsonify({'error': f'Error processing speaking test: {str(e)}'}), 500
+        return jsonify({'error': f'Failed to process speaking test: {str(e)}'}), 500
 
 def evaluate_speaking(transcription, set_name, task_number, difficulty_factor):
     logger.debug(f"Evaluating speaking for set_name: {set_name}, task_number: {task_number}")
     try:
-        with open('static/datasets/speaking.json') as f:
-            data = json.load(f)
+        data = load_json_data('static/datasets/speaking.json')
         set_data = next((s for s in data['speaking_comprehension'] if s['set_name'] == set_name), None)
         if not set_data:
             logger.error(f"No test set found for set_name: {set_name}")
@@ -145,7 +177,7 @@ def evaluate_speaking(transcription, set_name, task_number, difficulty_factor):
             logger.error(f"No task found for task_number: {task_number}")
             raise ValueError(f'No task found for task_number: {task_number}')
         
-        with open('prompt/speaking.txt') as f:
+        with open('prompt/speaking.txt', 'r') as f:
             system_prompt = f.read()
         logger.debug(f"Loaded speaking system prompt: {system_prompt[:100]}...")
         
@@ -158,23 +190,26 @@ def evaluate_speaking(transcription, set_name, task_number, difficulty_factor):
         logger.debug(f"Speaking prompt: {prompt[:200]}...")
         
         logger.debug(f"Sending prompt to Groq API for speaking task {task_number}")
-        completion = Config.client.chat.completions.create(
-            model='llama-3.3-70b-versatile',
-            response_format={'type': 'json_object'},
-            messages=[
-                {'role': 'system', 'content': system_prompt},
-                {'role': 'user', 'content': prompt}
-            ],
-            temperature=0.0,
-            max_tokens=200
-        )
-        
-        scores = json.loads(completion.choices[0].message.content)
-        logger.debug(f"Raw speaking scores from API: {scores}")
-        for key in scores:
-            scores[key] = min(9, round(scores[key] * difficulty_factor))
-        logger.debug(f"Adjusted speaking scores: {scores}")
-        return scores
+        try:
+            completion = Config.client.chat.completions.create(
+                model='llama-3.3-70b-versatile',
+                response_format={'type': 'json_object'},
+                messages=[
+                    {'role': 'system', 'content': system_prompt},
+                    {'role': 'user', 'content': prompt}
+                ],
+                temperature=0.0,
+                max_tokens=200
+            )
+            scores = json.loads(completion.choices[0].message.content)
+            logger.debug(f"Raw speaking scores from API: {scores}")
+            for key in scores:
+                scores[key] = min(9, round(scores[key] * difficulty_factor))
+            logger.debug(f"Adjusted speaking scores: {scores}")
+            return scores
+        except Exception as api_error:
+            logger.error(f"Groq API error: {str(api_error)}", exc_info=True)
+            raise ValueError(f'Failed to evaluate speaking response: {str(api_error)}')
     except Exception as e:
         logger.error(f"Error evaluating speaking: {str(e)}", exc_info=True)
-        raise ValueError(f'Error evaluating speaking response: {str(e)}')
+        raise

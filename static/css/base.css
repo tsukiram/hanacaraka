@@ -32,3 +32,29 @@ body {
     border-radius: 10px;
     overflow: hidden;
 }
+
+.friend-sidebar {
+    max-height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    background-color: #f8f9fa;
+}
+
+.friend-status-item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.friend-status-item.active {
+    background-color: #e0f7fa;
+}
+
+.toggle-public {
+    padding: 5px;
+    line-height: 1;
+    margin-left: 5px;
+}
+
+.toggle-public i {
+    font-size: 1rem;
+}

@@ -1,6 +1,8 @@
-<!-- templates/writing_test.html -->
+
+<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\writing_test.html -->
 {% extends 'base.html' %}
-{% block content %}
+{% block title %}Writing Test - Hanacaraka{% endblock %}
+{% block main_content %}
     <h2 class="text-center">Writing Comprehension Test - {{ set.set_name }}</h2>
     <form id="writingForm" method="POST" action="{{ url_for('test_writing.submit_writing') }}" data-submit-url="{{ url_for('test_writing.submit_writing') }}" data-results-url="{{ url_for('results.view_results') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

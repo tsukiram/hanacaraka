@@ -1,0 +1,70 @@
+<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\user_profile.html -->
+{% extends 'base.html' %}
+{% block title %}Profile - {{ user.username }} - Hanacaraka{% endblock %}
+{% block main_content %}
+    <div class="container">
+        <h2 class="text-center mb-4">{{ user.username }}'s Profile</h2>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        {% if user.profile_image %}
+                            <img src="{{ url_for('profile.get_profile_image') }}" alt="Profile Picture" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% else %}
+                            <div class="rounded-circle bg-secondary mb-3 mx-auto" style="width: 150px; height: 150px; line-height: 150px; color: white;">No Image</div>
+                        {% endif %}
+                        <h4>{{ user.username }}</h4>
+                        <p id="userStatus">{{ status.status if status else 'No status set' }}</p>
+                        <p id="activeTest">
+                            {% if status and status.active_test %}
+                                Working on {{ status.active_test.test_type|title }} test (Set: {{ status.active_test.set_name }})
+                            {% else %}
+                                Not working on any test
+                            {% endif %}
+                        </p>
+                        {% if not is_friend and user.id != current_user.id %}
+                            <button type="button" id="addFriendBtn" class="btn btn-primary" data-user-id="{{ user.id }}">Add Friend</button>
+                        {% endif %}
+                    </div>
+                </div>
+                <h3>Test Statistics</h3>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>Total Public Tests: {{ stats.total_tests }}</h5>
+                        <p>Reading: {{ stats.reading_tests }} (Avg: {{ stats.avg_reading|round(2) }})</p>
+                        <p>Listening: {{ stats.listening_tests }} (Avg: {{ stats.avg_listening|round(2) }})</p>
+                        <p>Writing: {{ stats.writing_tests }} (Avg: {{ stats.avg_writing|round(2) }})</p>
+                        <p>Speaking: {{ stats.speaking_tests }} (Avg: {{ stats.avg_speaking|round(2) }})</p>
+                    </div>
+                </div>
+                <h3>Public Test History</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Test Type</th>
+                            <th>Set Name</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                            <tr>
+                                <td>{{ result.test_type|title }}</td>
+                                <td>{{ result.set_name }}</td>
+                                <td>{{ result.score.get('overall', result.score.get('percentage', 0))|round(2) }}</td>
+                                <td>{{ result.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/user_profile.js') }}?v=1.0"></script>
+{% endblock %}

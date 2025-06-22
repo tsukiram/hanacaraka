@@ -1,8 +1,11 @@
-<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\profile.html -->
 {% extends 'base.html' %}
-{% block content %}
-    <div class="container mt-5">
+{% block title %}Hanacaraka - Profile{% endblock %}
+{% block main_content %}
+    <div class="container">
         <h2 class="text-center mb-4">User Profile</h2>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
         <div class="card mb-4">
             <div class="card-body text-center">
                 {% if user.profile_image %}
@@ -11,6 +14,15 @@
                     <div class="rounded-circle bg-secondary mb-3 mx-auto" style="width: 150px; height: 150px; line-height: 150px; color: white;">No Image</div>
                 {% endif %}
                 <h4>{{ user.username }}</h4>
+                <p id="userStatus">{{ user.status.status if user.status else 'No status' }}</p>
+                <p id="activeTest">
+                    {% if user.status and user.status.active_test_id %}
+                        {% set test = user.status.active_test %}
+                        Working on {{ test.test_type|title }} test (Set: {{ test.set_name }})
+                    {% else %}
+                        Not working on any test
+                    {% endif %}
+                </p>
                 <a href="{{ url_for('profile.update_profile') }}" class="btn btn-primary">Update Profile</a>
             </div>
         </div>
@@ -19,16 +31,16 @@
             <div class="col-md-6">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5>Total Tests: {{ stats.total_tests }}</h5>
-                        <p>Reading: {{ stats.reading_tests }} (Avg: {{ stats.avg_reading|round(2) }})</p>
-                        <p>Listening: {{ stats.listening_tests }} (Avg: {{ stats.avg_listening|round(2) }})</p>
-                        <p>Writing: {{ stats.writing_tests }} (Avg: {{ stats.avg_writing|round(2) }})</p>
-                        <p>Speaking: {{ stats.speaking_tests }} (Avg: {{ stats.avg_speaking|round(2) }})</p>
+                        <h5>Total Tests: {{ stats.total_tests|default(0) }}</h5>
+                        <p>Reading: {{ stats.reading_tests|default(0) }} (Avg: {{ (stats.avg_reading|default(0))|round(2) }})</p>
+                        <p>Listening: {{ stats.listening_tests|default(0) }} (Avg: {{ (stats.avg_listening|default(0))|round(2) }})</p>
+                        <p>Writing: {{ stats.writing_tests|default(0) }} (Avg: {{ (stats.avg_writing|default(0))|round(2) }})</p>
+                        <p>Speaking: {{ stats.speaking_tests|default(0) }} (Avg: {{ (stats.avg_speaking|default(0))|round(2) }})</p>
                     </div>
                 </div>
             </div>
         </div>
-        <h3>Test History</h3>
+        <h3>Test History <span id="friendRequestBadge" class="badge bg-primary" style="display: none;">0</span></h3>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -36,6 +48,7 @@
                     <th>Set Name</th>
                     <th>Score</th>
                     <th>Date</th>
+                    <th>Visibility</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -46,6 +59,16 @@
                         <td>{{ result.set_name }}</td>
                         <td>{{ result.score.get('overall', result.score.get('percentage', 0))|round(2) }}</td>
                         <td>{{ result.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-secondary btn-sm toggle-public" 
+                                    data-result-id="{{ result.id }}" 
+                                    data-is-public="{{ result.is_public|lower }}"
+                                    data-url="{{ url_for('profile.toggle_public', result_id=result.id) }}"
+                                    aria-label="Toggle public/private">
+                                <i class="bi {{ 'bi-globe' if result.is_public else 'bi-lock' }}"></i>
+                                {{ 'Public' if result.is_public else 'Private' }}
+                            </button>
+                        </td>
                         <td>
                             <form class="delete-result-form" 
                                   data-result-id="{{ result.id }}"
@@ -79,5 +102,35 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/profile.js') }}?v=1.0"></script>
+    <!-- Modal for Friend Requests -->
+    <div class="modal fade" id="friendRequestModal" tabindex="-1" aria-labelledby="friendRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="friendRequestModalLabel">Friend Requests</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="friendRequestList">
+                    {% for request in friend_requests %}
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>{{ request.sender.username }}</span>
+                            <div>
+                                <button class="btn btn-sm btn-success handle-friend-request" 
+                                        data-request-id="{{ request.id }}" 
+                                        data-action="accept">Accept</button>
+                                <button class="btn btn-sm btn-danger handle-friend-request" 
+                                        data-request-id="{{ request.id }}" 
+                                        data-action="reject">Reject</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/profile.js') }}?v=1.1"></script>
 {% endblock %}

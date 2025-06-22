@@ -1,4 +1,3 @@
-<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Hanacaraka{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/base.css') }}?v=1.0" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/base.css') }}?v=1.1" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -24,6 +24,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('sinta.sinta_page') }}">Sinta AI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('users.users_page') }}">Find Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('profile.profile_page') }}">Profile</a>
@@ -47,11 +50,61 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
-        {% block content %}{% endblock %}
+    <div class="container-fluid">
+        <div class="row">
+            {% if current_user.is_authenticated %}
+                <div class="col-md-2 bg-light p-3 friend-sidebar">
+                    <h5>Friends Status</h5>
+                    <div id="friendStatus">
+                        <!-- Friend statuses loaded here -->
+                    </div>
+                </div>
+                <div class="col-md-10 mt-4">
+            {% else %}
+                <div class="col-12 mt-4">
+            {% endif %}
+                {% block main_content %}{% endblock %}
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update friend status every 30 seconds
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('friendStatus')) {
+                updateFriendStatus();
+                setInterval(updateFriendStatus, 30000);
+            }
+            async function updateFriendStatus() {
+                try {
+                    const response = await fetch('/profile/friends', {
+                        headers: { 'X-CSRF-Token': '{{ csrf_token() }}' }
+                    });
+                    const friends = await response.json();
+                    const friendStatus = document.getElementById('friendStatus');
+                    friendStatus.innerHTML = '';
+                    for (const friend of friends) {
+                        const statusResponse = await fetch(`/profile/view/${friend.id}`);
+                        const profile = await statusResponse.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(profile, 'text/html');
+                        const status = doc.querySelector('#userStatus')?.textContent || 'No status';
+                        const activeTest = doc.querySelector('#activeTest')?.textContent || 'Not working on any test';
+                        const div = document.createElement('div');
+                        div.className = `friend-status-item ${activeTest !== 'Not working on any test' ? 'active' : ''}`;
+                        div.innerHTML = `
+                            <a href="/profile/view/${friend.id}">${friend.username}</a>
+                            <small class="text-muted d-block">${status}</small>
+                            <small class="text-muted d-block">${activeTest}</small>`;
+                        friendStatus.appendChild(div);
+                    }
+                } catch (error) {
+                    console.error('Error updating friend status:', error);
+                }
+            }
+        });
+    </script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

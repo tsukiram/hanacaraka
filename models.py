@@ -11,6 +11,10 @@ class User(UserMixin, db.Model):
     profile_image = db.Column(db.LargeBinary, nullable=True)  # BLOB untuk profile picture
     tests = db.relationship('TestResult', backref='user', lazy=True)
     chat_sessions = db.relationship('ChatSession', backref='user', lazy=True)
+    friendships = db.relationship('Friendship', foreign_keys='Friendship.user_id', backref='user', lazy=True)
+    friend_requests_sent = db.relationship('FriendRequest', foreign_keys='FriendRequest.sender_id', backref='sender', lazy=True)
+    friend_requests_received = db.relationship('FriendRequest', foreign_keys='FriendRequest.receiver_id', backref='receiver', lazy=True)
+    status = db.relationship('UserStatus', backref='user', uselist=False, lazy=True)
 
     def __init__(self, username, password_hash, profile_image=None):
         self.username = username
@@ -27,6 +31,7 @@ class TestResult(db.Model):
     set_name = db.Column(db.String(100), nullable=False)
     score = db.Column(db.JSON, nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    is_public = db.Column(db.Boolean, default=False)  # New column for public/private
 
 class ChatSession(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -53,3 +58,25 @@ class ChatMessage(db.Model):
 
     def __repr__(self):
         return f'<ChatMessage {self.role}: {self.content[:50]}...>'
+
+class Friendship(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    friend_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    friend = db.relationship('User', foreign_keys=[friend_id])
+
+class FriendRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String(20), default='pending')  # pending, accepted, rejected
+
+class UserStatus(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    status = db.Column(db.String(200))
+    active_test_id = db.Column(db.Integer, db.ForeignKey('test_result.id'))
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+    active_test = db.relationship('TestResult', backref='active_users', lazy=True)

@@ -1,6 +1,8 @@
-<!-- templates/listening_test.html -->
+
+<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\listening_test.html -->
 {% extends 'base.html' %}
-{% block content %}
+{% block title %}Listening Test - Hanacaraka{% endblock %}
+{% block main_content %}
     <h2 class="text-center">Listening Comprehension Test - {{ set.set_name }}</h2>
     <form id="listeningForm" method="POST" action="{{ url_for('test_listening.submit_listening') }}" data-submit-url="{{ url_for('test_listening.submit_listening') }}" data-results-url="{{ url_for('results.view_results') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
