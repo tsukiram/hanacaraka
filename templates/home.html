@@ -1,4 +1,4 @@
-<!-- templates/home.html -->
+<!-- C:\Users\rama\Desktop\hanacaraka\HANACARAKA\templates\home.html -->
 {% extends 'base.html' %}
 {% block title %}Hanacaraka - Home{% endblock %}
 {% block content %}
@@ -6,6 +6,15 @@
         <h1 class="text-center mb-4">Welcome to HANACARAKA</h1>
         <p class="lead text-center">Test your English proficiency with our comprehensive Reading, Listening, Speaking, and Writing tests, designed to mirror the IELTS format.</p>
         <div class="row mt-5">
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Sinta AI</h5>
+                        <p class="card-text">Practice English conversation with Sinta AI, your personal tutor with voice input and real-time corrections.</p>
+                        <a href="{{ url_for('sinta.sinta_page') }}" class="btn btn-primary">Chat with Sinta</a>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">

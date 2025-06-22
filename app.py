@@ -14,13 +14,16 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(basedir, "instance", "hanacaraka.db")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'static', 'audio')
-app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # Max upload size: 5MB for images
+app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'static', 'uploads')
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # Max upload size: 5MB for images/audio
 
-# Ensure the instance directory exists
+# Ensure the instance and upload directories exist
 instance_dir = os.path.join(basedir, 'instance')
+upload_dir = os.path.join(basedir, 'static', 'uploads')
 if not os.path.exists(instance_dir):
     os.makedirs(instance_dir)
+if not os.path.exists(upload_dir):
+    os.makedirs(upload_dir)
 
 # Initialize extensions
 db.init_app(app)
@@ -45,6 +48,7 @@ from routes.test_reading import test_reading
 from routes.test_listening import test_listening
 from routes.test_speaking import test_speaking
 from routes.test_writing import test_writing
+from routes.sinta import sinta
 
 # Register blueprints
 app.register_blueprint(auth, url_prefix='/auth')
@@ -55,6 +59,7 @@ app.register_blueprint(test_reading, url_prefix='/tests/reading')
 app.register_blueprint(test_listening, url_prefix='/tests/listening')
 app.register_blueprint(test_speaking, url_prefix='/tests/speaking')
 app.register_blueprint(test_writing, url_prefix='/tests/writing')
+app.register_blueprint(sinta, url_prefix='/sinta')
 
 # Create database tables if they don't exist
 with app.app_context():
