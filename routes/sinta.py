@@ -122,6 +122,51 @@ Begin by greeting the user appropriately and introducing the chosen topic of {to
         logger.error(f"Error creating new chat: {str(e)}", exc_info=True)
         return jsonify({'error': str(e)}), 500
 
+@sinta.route('/transcribe', methods=['POST'])
+@login_required
+def transcribe_audio():
+    try:
+        audio = request.files.get('audio')
+        if not audio:
+            return jsonify({'error': 'No audio file provided'}), 400
+
+        client = get_groq_client()
+        audio_data = BytesIO(audio.read())
+        audio_data.name = 'recording.wav'  # Required for Groq API
+        transcription = client.audio.transcriptions.create(
+            file=audio_data,
+            model='whisper-large-v3-turbo',
+            response_format='json',
+            language='en',
+            temperature=0.0
+        )
+        logger.debug(f"Transcribed audio: {transcription.text}")
+        return jsonify({'transcription': transcription.text})
+    except Exception as e:
+        logger.error(f"Error transcribing audio: {str(e)}", exc_info=True)
+        return jsonify({'error': f'Failed to transcribe audio: {str(e)}'}), 500
+
+@sinta.route('/delete/<int:session_id>', methods=['DELETE'])
+@login_required
+def delete_chat(session_id):
+    try:
+        session = ChatSession.query.get_or_404(session_id)
+        if session.user_id != current_user.id:
+            return jsonify({'error': 'Unauthorized access'}), 403
+
+        # Delete all messages associated with the session
+        ChatMessage.query.filter_by(chat_session_id=session_id).delete()
+        # Delete the session
+        db.session.delete(session)
+        db.session.commit()
+
+        logger.debug(f"Chat session {session_id} deleted for user {current_user.id}")
+        return jsonify({'message': 'Chat session deleted successfully'})
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Error deleting chat session {session_id}: {str(e)}", exc_info=True)
+        return jsonify({'error': f'Failed to delete chat session: {str(e)}'}), 500
+
 @sinta.route('/chat/<int:session_id>', methods=['GET', 'POST'])
 @login_required
 def chat(session_id):
@@ -182,7 +227,7 @@ PERSONALIZED INTERACTION:
                 transcription = client.audio.transcriptions.create(
                     file=audio_data,
                     model='whisper-large-v3-turbo',
-                    response_format='verbose_json',
+                    response_format='json',
                     language='en',
                     temperature=0.0
                 )

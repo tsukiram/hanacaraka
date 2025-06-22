@@ -1,0 +1,123 @@
+/* C:\Users\rama\Desktop\hanacaraka\HANACARAKA\static\css\sinta.css */
+.chat-container {
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    position: relative;
+}
+
+.message-user {
+    background-color: #e3f2fd;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.message-assistant {
+    background-color: #f5f5f5;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.variant {
+    color: #5cb85c;
+}
+
+.sidebar {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.correction-btn {
+    cursor: pointer;
+    color: #007bff;
+    font-size: 0.9em;
+}
+
+.error-text {
+    color: #d9534f; /* Untuk [rr[]rr] */
+}
+
+.corrected-text {
+    color: #5cb85c; /* Untuk [gg[]gg] */
+}
+
+.recording {
+    animation: pulse 1s infinite;
+    border-color: #dc3545 !important;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.recording-indicator {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.wave {
+    display: inline-block;
+    width: 5px;
+    height: 20px;
+    background: #dc3545;
+    margin: 0 2px;
+    animation: wave 0.6s infinite ease-in-out;
+}
+
+.wave:nth-child(1) { animation-delay: 0s; }
+.wave:nth-child(2) { animation-delay: 0.2s; }
+.wave:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes wave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(2); }
+}
+
+.transcription-preview {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.transcription-text {
+    margin: 0;
+    color: #333;
+    flex-grow: 1;
+}
+
+.delete-session {
+    padding: 5px;
+    line-height: 1;
+}
+
+.delete-session i {
+    font-size: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .recording {
+        animation: none;
+    }
+    .wave {
+        animation: none;
+        transform: scaleY(1);
+    }
+}
